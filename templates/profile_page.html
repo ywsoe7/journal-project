@@ -1,8 +1,22 @@
 {% extends 'base.html' %}
+
 {% block title %} Welcome to your journal! {% endblock %}
 
-{% block body %}
-<h1>Ready to journal.. </h1>
-<a href="/journal">Write in your journal..</a>
+{% block head %}
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+  <script type="text/javascript" src="/static/js/caleandar.js"></script>
+  <link rel="stylesheet" href="/static/css/theme3.css"/>
+{% endblock %}
 
+{% block body %}
+<div>
+  <h1>Ready to journal.. </h1>
+  <a href="/journal">Write in your journal..</a>
+</div>
+
+<div>
+  <div id="calendar" class="calendar"></div>
+</div>
+
+<script type="text/javascript" src="/static/js/profile.js"></script>
 {% endblock %}

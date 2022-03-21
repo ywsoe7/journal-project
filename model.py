@@ -98,13 +98,13 @@ class Countdown(db.Model):
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     set_content = db.Column(db.Text)
-    habit_date = db.Column(db.DateTime)
+    countdown_date = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable= False)
 
     user = db.relationship("User", back_populates="countdowns")
 
     def __repr__(self):
-        return f"<Countdown id={self.id} habit_date={self.habit_date}>"
+        return f"<Countdown id={self.id} countdown_date={self.countdown_date}>"
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///users", echo=True):
