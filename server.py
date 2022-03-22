@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, flash, session, redirect
 from model import connect_to_db, db
 import crud
 
+from datetime import datetime
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
@@ -74,21 +75,40 @@ def journal_page():
     return render_template("journal_page.html")
 
 
-@app.route("/journal-entry", methods=["POST"])
-def journal_entry_page():
-    """Save a journal entry."""
+@app.route("/journal/<entry_date>", methods=["POST"])
+def journal_entry_by_date(entry_date):
+    """Show journal entry page by date."""
 
+    created_ts = datetime.now()
     journal_text = request.form.get("journal_text")
-    entry_date = request.form.get("entry_date")
     user_id = session["user_id"]
 
-    entry = crud.create_entry(journal_text, entry_date, user_id)
+    entry = crud.create_entry(journal_text, entry_date, created_ts, user_id)
 
     db.session.add(entry)
     db.session.commit()
 
-    return redirect("/journal")
+    flash("Saved succesfully. Way to go!")
 
+    return render_template("journal_page.html")
+
+
+# @app.route("/profile/ratings")
+# def save_mood_rating():
+#     """Save user's rated mood by day."""
+
+#     mood_rating = request.args.get()
+#     rating_date = 
+#     user_id = session["user_id"]
+
+#     rated = crud.get_mood_rating(mood_rating, rating_date, user_id)
+
+#     db.session.add(rated)
+#     db.session.commit()
+
+#     flash("Successfully saved your mood!")
+
+#     return render_template("/profile_page.html")
 
 if __name__ == "__main__":
     connect_to_db(app)

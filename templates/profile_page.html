@@ -6,14 +6,33 @@
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
   <script type="text/javascript" src="/static/js/caleandar.js"></script>
   <link rel="stylesheet" href="/static/css/theme3.css"/>
+  <link rel="stylesheet" href="/static/css/profile_page.css"/>
 {% endblock %}
 
 {% block body %}
 <div>
-  <h1>Ready to journal.. </h1>
-  <a href="/journal">Write in your journal..</a>
-</div>
-
+  <h1>Ready to journal..</h1>
+</div><br>
+<section id="mood-imgs">
+  <h2>How are you feeling today?</h2><br>
+  <a href="/profile/ratings" style="text-decoration:none"> 
+    <img alt="angry" src="/static/img/angry.png" width="70" height="70">
+  </a>
+  <a href="/profile/ratings" style="text-decoration:none">
+    <img alt="sad" src="/static/img/sad.png" width="70" height="70">
+  </a>
+  <a href="/profile/ratings" style="text-decoration:none">
+    <img alt="happy" src="/static/img/happy.png" width="70" height="70">
+  </a>
+  <a href="/profile/ratings" style="text-decoration:none">
+    <img alt="star" src="/static/img/star.png" width="70" height="70">
+  </a>
+  <a href="/profile/ratings" style="text-decoration:none">
+    <img alt="love" src="/static/img/love.png" width="70" height="70">
+  </a>
+</section><br>
+<br>
+<br>
 <div>
   <div id="calendar" class="calendar"></div>
 </div>

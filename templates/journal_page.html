@@ -3,7 +3,7 @@
 
 {% block body %}
 <h1>HOW'S YOUR DAY SO FAR</h1>
-  <form action="/journal-entry" method="POST" class="journal-text">
+  <form action="/journal/{{ request.args.get('date') }}" method="POST" class="journal-text">
     <textarea rows="40" cols="120" name="journal_text">
     </textarea><br>
     <button class="btn" type="submit">Save</button>

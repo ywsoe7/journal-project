@@ -35,7 +35,8 @@ class Entry(db.Model):
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     journal_text = db.Column(db.Text)
-    entry_date = db.Column(db.DateTime)
+    entry_date = db.Column(db.Date)
+    created_ts = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
     user = db.relationship("User", back_populates="entries")
