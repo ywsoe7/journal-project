@@ -52,7 +52,7 @@ class MoodRating(db.Model):
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     mood_rating = db.Column(db.Integer)
-    rating_date = db.Column(db.DateTime)
+    rating_date = db.Column(db.Date)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable= False)
 
     user = db.relationship("User", back_populates="mood_ratings")

@@ -17,10 +17,10 @@ def create_user(fname, lname, email, password, phone):
     return user
 
 
-def get_user_by_id(user_id):
+def get_user_by_id(id):
     """Return a user by primary key."""
 
-    return User.query.get(user_id)
+    return User.query.get(id)
 
 
 def get_user_by_email(email):
@@ -42,7 +42,13 @@ def create_entry(journal_text, entry_date, created_ts, user_id):
     return journal_entry
 
 
-def get_mood_rating(mood_rating, rating_date, user_id):
+def get_entry(user_id, entry_date):
+    """Get an entry."""
+
+    return Entry.query.filter(Entry.user_id == user_id, Entry.entry_date == entry_date).first()
+
+
+def create_mood_rating(mood_rating, rating_date, user_id):
     """Create and return a user's mood rating."""
 
     mood_rated = MoodRating(

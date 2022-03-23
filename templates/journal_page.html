@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 {% block title %} Welcome to your journal! {% endblock %}
 
+{% block head %}
+  <script type="text/javascript" src="/static/js/ajax.js"></script>
+{% endblock %}
+
 {% block body %}
+<a href="/profile">Go to profile page</a>
 <h1>HOW'S YOUR DAY SO FAR</h1>
-  <form action="/journal/{{ request.args.get('date') }}" method="POST" class="journal-text">
-    <textarea rows="40" cols="120" name="journal_text">
-    </textarea><br>
+  <form action="/journal/{{ request.args.get('date') }}" method="POST">
+    <textarea rows="40" cols="120" name="journal_text" id="journal-text"></textarea>
+    </br>
     <button class="btn" type="submit">Save</button>
   </form>
 
