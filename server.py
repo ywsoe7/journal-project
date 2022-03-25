@@ -1,6 +1,6 @@
 """Server for journaling app."""
 
-from flask import Flask, render_template, request, flash, session, redirect
+from flask import Flask, render_template, request, flash, session, redirect, jsonify
 from model import connect_to_db, db
 import crud
 
@@ -129,12 +129,13 @@ def get_ratings(year, month):
     user_id = session["user_id"]
     ratings = crud.get_ratings(user_id, year, month)
 
-    rating_by_date = {}
+    rating_by_day = {}
 
     for rating in ratings:
-        rating_by_date[rating.rating_date] = rating.mood_rating
+        day = rating.rating_date.strftime("%d")
+        rating_by_day[day] = rating.mood_rating   
         
-    return rating_by_date
+    return jsonify(rating_by_day)
 
 
 if __name__ == "__main__":
