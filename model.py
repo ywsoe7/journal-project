@@ -58,7 +58,7 @@ class MoodRating(db.Model):
     user = db.relationship("User", back_populates="mood_ratings")
 
     def __repr__(self):
-        return f"<MoodRating id={self.id} mood_rating={self.mood_rating}>"
+        return f"<MoodRating id={self.id} mood_rating={self.mood_rating} rating_date={self.rating_date}>"
 
 
 class Prompt(db.Model):
