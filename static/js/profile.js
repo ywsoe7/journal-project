@@ -1,5 +1,4 @@
 var eventClick = function(date) {
-    console.log(date);
     location.href = '/journal?date=' + date;
 }
 
