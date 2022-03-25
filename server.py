@@ -97,7 +97,6 @@ def create_entry(entry_date):
     return redirect(f'/journal?date={entry_date}')
 
 
-
 @app.route("/journal/<entry_date>")
 def get_entry(entry_date):
 
@@ -122,6 +121,21 @@ def save_mood_rating(mood_rating):
     flash("Successfully saved your mood!")
 
     return render_template("/profile_page.html")
+
+
+@app.route("/profile/ratings/<year>/<month>")
+def get_ratings(year, month):
+
+    user_id = session["user_id"]
+    ratings = crud.get_ratings(user_id, year, month)
+
+    rating_by_date = {}
+
+    for rating in ratings:
+        rating_by_date[rating.rating_date] = rating.mood_rating
+        
+    return rating_by_date
+
 
 if __name__ == "__main__":
     connect_to_db(app)
