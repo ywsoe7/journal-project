@@ -2,7 +2,6 @@
 {% block title %} Welcome to your journal! {% endblock %}
 
 {% block head %}
-  <script type="text/javascript" src="/static/js/ajax.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -13,5 +12,11 @@
     </br>
     <button class="btn" type="submit">Save</button>
   </form>
-
+  
+  <p>Modified: <span id="datetime"></span></p>
+  <script>
+  var dt = new Date();
+  document.getElementById("datetime").innerHTML = dt.toLocaleString();
+  </script>
+  <script type="text/javascript" src="/static/js/journal.js"></script>
 {% endblock %}
