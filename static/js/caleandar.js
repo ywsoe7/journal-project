@@ -140,6 +140,7 @@ function createCalendar(calendar, element, adjuster) {
     var today = document.createElement('div');
     today.className += ' today';
     today.innerHTML = months[calendar.Selected.Month] + ", " + calendar.Selected.Year;
+    // today.innerHTML = calendar.Selected.Month + 1 + ", " + calendar.Selected.Year;
     datetime.appendChild(today);
     if (calendar.Options.NavShow && !calendar.Options.NavVertical) {
       var fwd = document.createElement('div');
@@ -197,7 +198,7 @@ function createCalendar(calendar, element, adjuster) {
     // Current Month's Days
     for (var i = 0; i < calendar.Selected.Days; i++) {
       var day = document.createElement('li');
-      day.className += "cld-day currMonth";
+      day.className += `cld-day day${i} currMonth`;    // modified
       //Disabled Days
       var d = (i + calendar.Selected.FirstDay) % 7;
       for (var q = 0; q < calendar.Options.DisabledDays.length; q++) {
