@@ -9,7 +9,7 @@ let settings = {
     DateTimeFormat: 'mmm, yyyy',
     EventClick: eventClick,
     EventTargetWholeDay: true,
-    DisabledDays: [0, 6]
+    // DisabledDays: [0, 6]
 }
 
 let element = caleandar(document.getElementById("calendar"), [], settings);

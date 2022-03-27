@@ -1,6 +1,6 @@
 'use strict';
 
-function show_rating() {
+function show_rating(evt) {
     const date = document.querySelector('.today').innerHTML;
     const months = [
         "January", 
@@ -31,6 +31,8 @@ function show_rating() {
             document.querySelector('.day' + (day - 1)).style.background = rating_by_color[rating_num];
           }
       });
+
+    document.querySelectorAll('.cld-nav').forEach(e => e.addEventListener('click', show_rating));
 }
 
 window.onload = show_rating()
