@@ -1,6 +1,6 @@
 const addHabits = document.querySelector(".add-habit");
 const habitsList = document.querySelector(".habits");
-const habits = JSON.parse(localStorage.getItem("habits")) || [];
+const habits = [];
 
 
 function addHabit(evt) {
@@ -18,7 +18,6 @@ function addHabit(evt) {
 
   habits.push(habit);
   listHabits(habits, habitsList);
-  localStorage.setItem("habits", JSON.stringify(habits))
   this.reset();
   console.log(habit);
 }
