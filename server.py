@@ -2,7 +2,7 @@
 
 from flask import Flask, render_template, request, flash, session, redirect, jsonify
 from model import connect_to_db, db
-import crud
+import crud, random
 
 from datetime import datetime
 from jinja2 import StrictUndefined
@@ -10,6 +10,18 @@ from jinja2 import StrictUndefined
 app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
+
+
+prompts = [
+    "Prompt: Do your current friendships and relationships bring joy to you?",
+    "Prompt: What was the best part about your day today?",
+    "Prompt: What was the worst part about your day today?",
+    "Prompt: Have trouble sleeping? What's keeping you up?",
+    "Prompt: What are your plans for this weekend?",
+    "Prompt: What is the last dream you remember?",
+    "Prompt: What is your biggest regret?",
+    "Prompt: What are you grateful for?"
+]
 
 
 @app.route("/")
@@ -57,6 +69,7 @@ def process_login():
         return redirect("/")
     else:
         session["user_id"] = user.id
+        session["user_fname"] = user.fname
         session["user_email"] = user.email
         flash(f"Welcome back, {user.fname}!")
 
@@ -136,6 +149,12 @@ def get_ratings(year, month):
         rating_by_day[day] = rating.mood_rating   
         
     return jsonify(rating_by_day)
+
+
+@app.route("/journal/prompts")
+def get_prompts():
+    
+    return random.choice(prompts)
 
 
 if __name__ == "__main__":

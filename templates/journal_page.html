@@ -5,10 +5,20 @@
 {% endblock %}
 
 {% block body %}
-<a href="/profile">Go to profile page</a>
-<h1>HOW'S YOUR DAY SO FAR</h1>
+<a href="/profile">Back to profile page</a>
+<h1>{{ session["user_fname"] }}'s Journal</h1>
+<h3>{{ request.args.get('date') }}</h3>
+
+<h2>Would you like a prompt to help you get started?</h2>
+<p>
+  <button id="get-prompt-button" class="btn btn-primary mt-2">Prompt</button>
+</p>
+<div id="prompt-text"></div>
+<br>
+
   <form action="/journal/{{ request.args.get('date') }}" method="POST">
-    <textarea rows="40" cols="120" name="journal_text" id="journal-text"></textarea>
+    <textarea rows="40" cols="120" name="journal_text" id="journal-text" placeholder="Write your journal...">
+    </textarea>
     </br>
     <button class="btn" type="submit">Save</button>
   </form>
@@ -19,4 +29,5 @@
   document.getElementById("datetime").innerHTML = dt.toLocaleString();
   </script>
   <script type="text/javascript" src="/static/js/journal.js"></script>
+  <script type="text/javascript" src="/static/js/prompts.js"></script>
 {% endblock %}

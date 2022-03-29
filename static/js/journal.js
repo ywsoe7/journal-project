@@ -11,5 +11,3 @@ function show_entry() {
 }
 
 window.onload = show_entry()
-
-
