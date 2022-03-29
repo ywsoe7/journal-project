@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %} Welcome to your journal! {% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <h2>Habits</h2>
+  <p></p>
+  <form class="add-habit">
+    <input
+      class="habit"
+      type="text"
+      name="habit"
+      placeholder="Enter Habit Name"
+      required
+    />
+    <input
+      type="number"
+      name="repetitions"
+      placeholder="Number of Repetitions"
+      min="1"
+      required
+    />
+    <div class="frequency">
+      <label for="timeframe">Frequency: </label>
+      <select name="timeframe" id="timeframe">
+        <option value="Daily">Daily</option>
+        <option value="Weekly">Weekly</option>
+        <option value="Monthly">Monthly</option>
+        <option value="Yearly">Yearly</option>
+      </select>
+    </div>
+    <input type="submit" value="+ Add Habit">
+  </form>
+  <ul class="habits">
+    <li>Enter a new habit</li>
+  </ul>
+</div>
+  <script type="text/javascript" src="/static/js/habits.js"></script>
+{% endblock %}
+
