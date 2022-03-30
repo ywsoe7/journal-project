@@ -1,6 +1,6 @@
 """CRUD operations."""
 
-from model import db, User, Entry, MoodRating, Prompt, Habit, Countdown, connect_to_db
+from model import db, User, Entry, MoodRating, Prompt, Goal, Habit, CompletedHabit, Countdown, connect_to_db
 from sqlalchemy import extract
 
 

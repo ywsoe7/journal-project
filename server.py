@@ -159,7 +159,7 @@ def get_prompts():
 
 @app.route("/habits")
 def habits():
-    """View homepage."""
+    """View habits page."""
 
     return render_template("habits_page.html")
 
