@@ -1,0 +1,17 @@
+.grid{
+  display: grid;
+  min-height: 100%;
+  grid-template-areas:
+    "nav"
+    "main";
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 1fr;
+}
+
+.nav{
+  grid-area: "nav";  
+}
+
+.main{
+    grid-area: "main";  
+  }
