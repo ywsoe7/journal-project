@@ -1,18 +1,74 @@
 .grid{
   display: grid;
-  min-height: 100%;
-  grid-template-areas:
-    "nav"
-    "main";
+  min-height: 100vh;
+  grid-template-areas: "nav" "main";
   grid-template-columns: 30% 70%;
   grid-template-rows: 1fr;
 }
 
 .nav{
-  grid-area: "nav";  
-  background-color: lig;
+  grid-area: "nav";
+  padding-top: 10px;
+  padding-left: 100px;
+  background-color: lightcyan;
 }
 
 .main{
-    grid-area: "main";  
-  }
+  grid-area: "main";
+  padding-top: 10px;
+  padding-right: 100px;  
+  background-color: lightgoldenrodyellow;
+}
+
+.title{
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 30px;
+  margin-bottom: 100px;
+}
+
+.header-container{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header-item{
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  padding-right: 50px;
+  font-size: 22px;
+}
+
+.goals{
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  display: flex;
+  flex-direction: column;
+  margin-right: 45px;
+}
+
+.add-goal-btn img{
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.goal-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 45px;
+}
+
+.goal-name{
+  text-transform: uppercase;
+}
+
+.goal-action{
+  display: flex;
+  align-items: center;
+  margin-right: 0;
+}
+
+.goal-action img {
+  margin-right: 10px;
+}

@@ -164,6 +164,20 @@ def habits():
     return render_template("habits_page.html")
 
 
+@app.route("/goals")
+def goals():
+    """View habits page."""
+
+    return 
+
+
+@app.route("/habit")
+def habit():
+    """View habit page."""
+
+    
+
+
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)
