@@ -104,7 +104,7 @@ class Habit(db.Model):
     completed_habits = db.relationship("CompletedHabit", back_populates="habits")
 
     def __repr__(self):
-        return f"<Habit id={self.id} habit_text={self.habit_text} frequency={self.frequency}>"
+        return f"<Habit id={self.id} text={self.text} frequency={self.frequency}>"
 
 
 class CompletedHabit(db.Model):

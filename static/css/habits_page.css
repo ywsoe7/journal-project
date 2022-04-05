@@ -1,24 +1,25 @@
-.grid{
+.habitsContainer{
   display: grid;
   min-height: 100vh;
   grid-template-areas: "nav" "main";
   grid-template-columns: 30% 70%;
   grid-template-rows: 1fr;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.nav{
+.displayHabits{
   grid-area: "nav";
   padding-top: 10px;
   padding-left: 100px;
   background-color: lightcyan;
 }
 
-.main{
+.addHabit{
   grid-area: "main";
   padding-top: 10px;
   padding-right: 100px;  
   background-color: lightgoldenrodyellow;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .title{

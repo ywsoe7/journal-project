@@ -208,33 +208,39 @@ def get_prompts():
 #     return goal
 
 
+@app.route("/habits.json")
+def habits_json():
+    habits = crud.get_habits(session["user_id"])
+
+    result = []
+
+    for habit in habits:
+        result.append({"id": habit.id, "habit": habit.text, "frequency": habit.frequency})
+
+    return jsonify(result)
+
+
+
+@app.route("/habits")
+def get_habits():
+    return render_template("habits_page.html")
+
+
 @app.route("/habits", methods=["POST"])
-def habits():
+def create_habits():
     """View habits page."""
 
     user_id = session["user_id"]
-    sort_habit = None
-    text = request.form.get("habit")
-    frequency = request.form.get("frequency")
+    text = request.get_json().get("habit")
+    frequency = request.get_json().get("frequency")
 
-
-    habit = crud.create_habit(text, frequency, sort_habit, user_id)
+    habit = crud.create_habit(text, frequency, None, user_id)
 
     db.session.add(habit)
     db.session.commit()
     # flash("Habit created successfully!")
 
-    return render_template("habits_page.html")
-
-
-# @app.route("/add-habit", methods=["POST"])
-# def add_habit():
-#     """Add a new habit to the DB."""
-
-#     habit = request.args.get("habit")
-#     frequency = request.args.get("frequency")
-
-#     return 
+    return jsonify({"id": habit.id})
 
 
 if __name__ == "__main__":

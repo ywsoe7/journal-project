@@ -102,7 +102,7 @@ def get_habits(user_id):
     """Get habit."""
     
     return Habit.query.filter(
-        Habit.user_id == user_id).first()
+        Habit.user_id == user_id).all()
 
 
 def completed_habit(date, habit_id):
