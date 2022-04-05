@@ -21,6 +21,7 @@ class User(db.Model):
     entries = db.relationship("Entry", back_populates="user")
     mood_ratings = db.relationship("MoodRating", back_populates="user")
     goals = db.relationship("Goal", back_populates="user")
+    habits = db.relationship("Habit", back_populates="user")
     countdowns = db.relationship("Countdown", back_populates="user")
 
     def __repr__(self):
@@ -83,7 +84,6 @@ class Goal(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable= False)
 
     user = db.relationship("User", back_populates="goals")
-    habits = db.relationship("Habit", back_populates="goal")
 
     def __repr__(self):
         return f"<Prompt id={self.id} description={self.description}>"
@@ -98,9 +98,9 @@ class Habit(db.Model):
     text = db.Column(db.Text)
     frequency = db.Column(db.Integer)
     sort_habit = db.Column(db.Integer)
-    goal_id = db.Column(db.Integer, db.ForeignKey("goals.id"), nullable= False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable= False)
 
-    goal = db.relationship("Goal", back_populates="habits")
+    user = db.relationship("User", back_populates="habits")
     completed_habits = db.relationship("CompletedHabit", back_populates="habits")
 
     def __repr__(self):
@@ -110,7 +110,7 @@ class Habit(db.Model):
 class CompletedHabit(db.Model):
     """A completed habit."""
 
-    __tablename__ = "completed_habits"
+    __tablename__ = "completed_habits" 
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     date = db.Column(db.Date)
@@ -119,7 +119,7 @@ class CompletedHabit(db.Model):
     habits = db.relationship("Habit", back_populates="completed_habits")
 
     def __repr__(self):
-        return f"<Prompt id={self.id} prompt_text={self.prompt_text}>"
+        return f"<CompletedHabit id={self.id} date={self.date}>"
 
 
 class Countdown(db.Model):

@@ -23,6 +23,32 @@ prompts = [
     "Prompt: What are you grateful for?"
 ]
 
+HABIT_DATA = [
+    {
+        "text": "drink water",
+        "frequency": "5",
+        "sort_habit": "1",
+        "habitId": 1,
+    },
+    {
+        "text": "gym",
+        "frequency": "4",
+        "sort_habit": "1",
+        "habitId": 2,
+    },
+    {
+        "text": "study",
+        "frequency": "2",
+        "sort_habit": "3",
+        "habitId": 3,
+    },
+    {
+        "text": "run everyday",
+        "frequency": "7",
+        "sort_habit": "4",
+        "habitId": 4,
+    }
+]
 
 @app.route("/")
 def homepage():
@@ -157,25 +183,58 @@ def get_prompts():
     return random.choice(prompts)
 
 
-@app.route("/habits")
+# @app.route("/goals")
+# def add_goal():
+
+#     user_id = session["user_id"]
+#     sort_goal = None
+#     description = None
+
+#     goal = crud.create_goal(description, sort_goal, user_id)
+
+#     db.session.add(goal)
+#     db.session.commit()
+#     flash("Goal created successfully!")
+
+#     return render_template("habits_page.html")
+
+
+# @app.route("/goals")
+# def get_goal():
+
+#     user_id = session["user_id"]
+#     goal = crud.get_goal(user_id)
+
+#     return goal
+
+
+@app.route("/habits", methods=["POST"])
 def habits():
     """View habits page."""
+
+    user_id = session["user_id"]
+    sort_habit = None
+    text = request.form.get("habit")
+    frequency = request.form.get("frequency")
+
+
+    habit = crud.create_habit(text, frequency, sort_habit, user_id)
+
+    db.session.add(habit)
+    db.session.commit()
+    # flash("Habit created successfully!")
 
     return render_template("habits_page.html")
 
 
-@app.route("/goals")
-def goals():
-    """View habits page."""
+# @app.route("/add-habit", methods=["POST"])
+# def add_habit():
+#     """Add a new habit to the DB."""
 
-    return 
+#     habit = request.args.get("habit")
+#     frequency = request.args.get("frequency")
 
-
-@app.route("/habit")
-def habit():
-    """View habit page."""
-
-    
+#     return 
 
 
 if __name__ == "__main__":

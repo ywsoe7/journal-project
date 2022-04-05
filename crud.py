@@ -18,12 +18,6 @@ def create_user(fname, lname, email, password, phone):
     return user
 
 
-def get_user_by_id(id):
-    """Return a user by primary key."""
-
-    return User.query.get(id)
-
-
 def get_user_by_email(email):
     """Return a user by email."""
 
@@ -46,7 +40,9 @@ def create_entry(journal_text, entry_date, created_ts, user_id):
 def get_entry(user_id, entry_date):
     """Get an entry."""
 
-    return Entry.query.filter(Entry.user_id == user_id, Entry.entry_date == entry_date).first()
+    return Entry.query.filter(
+        Entry.user_id == user_id,
+        Entry.entry_date == entry_date).first()
 
 
 def create_mood_rating(mood_rating, rating_date, user_id):
@@ -68,6 +64,61 @@ def get_ratings(user_id, year, month):
         MoodRating.user_id == user_id,
         extract('year', MoodRating.rating_date) == year,
         extract('month', MoodRating.rating_date) == month).all()
+
+
+def create_goal(description, sort_goal, user_id):
+    """Create and return a user's goal."""
+
+    goal = Goal(
+        description=description,
+        sort_goal=sort_goal,
+        user_id=user_id
+    )
+
+    return goal
+
+
+def get_goal(user_id):
+    """Get goal."""
+    
+    return Goal.query.filter(
+        Goal.user_id == user_id).first()
+
+
+def create_habit(text, frequency, sort_habit, user_id):
+    """Create and return a user's habit."""
+
+    habit = Habit(
+        text=text,
+        frequency=frequency,
+        sort_habit=sort_habit,
+        user_id=user_id
+    )
+
+    return habit
+
+
+def get_habits(user_id):
+    """Get habit."""
+    
+    return Habit.query.filter(
+        Habit.user_id == user_id).first()
+
+
+def completed_habit(date, habit_id):
+   
+    completed = Habit(
+        date=date,
+        habit_id=habit_id
+    )
+
+    return completed
+
+
+def get_completed_habits(habit_id):
+    
+    return CompletedHabit.query.filter(
+        CompletedHabit.habit_id == habit_id).first()
 
 
 if __name__ == "__main__":
