@@ -105,6 +105,10 @@ def get_habits(user_id):
         Habit.user_id == user_id).all()
 
 
+def get_habit(habit_id):
+    return Habit.query.get(habit_id)
+
+
 def completed_habit(date, habit_id):
    
     completed = Habit(

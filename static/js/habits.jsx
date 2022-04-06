@@ -1,3 +1,5 @@
+// import Modal from 'react-bootstrap/Modal'
+
 const AddHabit = (props) => {
   // const [completedDays, setCompletedDays] = React.useState([]);
   const [habit, setHabit] = React.useState('');
@@ -9,7 +11,7 @@ const AddHabit = (props) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ habit, frequency }),
+      body: JSON.stringify({ habit, frequency })
     }).then((response) => {
       response.json().then(response => {
         console.log(response);
@@ -46,7 +48,54 @@ const AddHabit = (props) => {
   )
 };
 
+// function Example() {
+//   const [show, setShow] = useState(false);
+
+//   const handleClose = () => setShow(false);
+//   const handleShow = () => setShow(true);
+
+//   return (
+//     <>
+//       <Button variant="primary" onClick={handleShow}>
+//         Launch static backdrop modal
+//       </Button>
+
+//       <Modal
+//         show={show}
+//         onHide={handleClose}
+//         backdrop="static"
+//         keyboard={false}
+//       >
+//         <Modal.Header closeButton>
+//           <Modal.Title>Modal title</Modal.Title>
+//         </Modal.Header>
+//         <Modal.Body>
+//           I will not close if you click outside me. Don't even try to press
+//           escape key.
+//         </Modal.Body>
+//         <Modal.Footer>
+//           <Button variant="secondary" onClick={handleClose}>
+//             Close
+//           </Button>
+//           <Button variant="primary">Understood</Button>
+//         </Modal.Footer>
+//       </Modal>
+//     </>
+//   );
+// }
+
 function HabitItem(props) {
+  function deleteHabit() {
+    fetch(`/habits/${props.id}`, {
+      method: 'DELETE'
+    }).then((response) => {
+      response.json().then(response => {
+        console.log(props.index);
+        props.deleteHabit(props.index);
+      });
+    });
+  }
+
   return (
     <div className="card">
       <h2> {props.habit} </h2>
@@ -82,8 +131,24 @@ function HabitItem(props) {
         </div>
       </label>
       <p> Progress: /{props.frequency}</p>
-      <img className="edit-habit-btn" alt="edit-goal-btn" src="/static/img/edit.png" width="20" height="20"></img>
-      <img className="delete-habit-btn" alt="delete-goal-btn" src="/static/img/delete.png" width="20" height="20"></img>
+      <a href="#" onClick={deleteHabit}>
+        <img
+          className="edit-habit-btn"
+          alt="edit-goal-btn"
+          src="/static/img/edit.png"
+          width="20"
+          height="20" 
+        />
+      </a>
+      <a href= "#" onClick={deleteHabit}>
+        <img
+          className="delete-habit-btn"
+          alt="delete-goal-btn"
+          src="/static/img/delete.png"
+          width="20"
+          height="20"
+        />
+      </a>
       <hr />
     </div>
   );
@@ -92,11 +157,17 @@ function HabitItem(props) {
 const HabitsContainer = (props) => {
   const [habits, setHabits] = React.useState([]);
 
-  function addHabit(id, habit, frequency) {
+  function deleteHabit(index) {
     const currentHabits = [...habits];
+    currentHabits.splice(index, 1);
+
+    setHabits(currentHabits);
+  }
+
+  function addHabit(id, habit, frequency) {
     const newHabit = { id, habit, frequency };
 
-    setHabits([...currentHabits, newHabit]);
+    setHabits([...habits, newHabit]);
   }
 
   React.useEffect(() => {
@@ -107,11 +178,14 @@ const HabitsContainer = (props) => {
 
   const currentHabits = [];
 
-  for (const habit of habits) {
+  for (const [index, habit] of habits.entries()) {
     currentHabits.push(
       <HabitItem
+        deleteHabit={deleteHabit}
+        index={index}
+        id={habit.id}
         key={habit.id}
-        habit={habit.habit}
+        habit={habit.habit}  // TODO: change habit to text
         frequency={habit.frequency}
       />
     );
@@ -122,7 +196,13 @@ const HabitsContainer = (props) => {
       <AddHabit addHabit={addHabit}/>
 
       <div className="displayHabits">
-        <h1>Current Habits</h1>
+        <div>
+          <h1>Current Habits</h1>
+          <div> 
+            <img alt="add-habit-btn" src="/static/img/add.png" width="13" height="13"></img>
+            Add Habit
+          </div>
+        </div>
         <ul className="grid">{currentHabits}</ul>
       </div>
     </div>

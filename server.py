@@ -220,14 +220,13 @@ def habits_json():
     return jsonify(result)
 
 
-
 @app.route("/habits")
 def get_habits():
     return render_template("habits_page.html")
 
 
 @app.route("/habits", methods=["POST"])
-def create_habits():
+def create_habit():
     """View habits page."""
 
     user_id = session["user_id"]
@@ -237,6 +236,28 @@ def create_habits():
     habit = crud.create_habit(text, frequency, None, user_id)
 
     db.session.add(habit)
+    db.session.commit()
+
+    return jsonify({"id": habit.id})
+
+
+@app.route("/habits/<habit_id>", methods=["PUT"])
+def update_habit(habit_id):
+    habit  = crud.get_habit(habit_id)
+
+    habit.text = request.get_json().get("habit")
+    habit.frequency = request.get_json().get("frequency")
+
+    db.session.update(habit)
+    db.session.commit()
+
+    return jsonify({"id": habit.id})
+
+@app.route("/habits/<habit_id>", methods=["DELETE"])
+def delete_habit(habit_id):
+    habit  = crud.get_habit(habit_id)
+
+    db.session.delete(habit)
     db.session.commit()
 
     return jsonify({"id": habit.id})
