@@ -1,5 +1,3 @@
-// import Modal from 'react-bootstrap/Modal'
-
 const AddHabit = (props) => {
   // const [completedDays, setCompletedDays] = React.useState([]);
   const [habit, setHabit] = React.useState('');
@@ -48,41 +46,56 @@ const AddHabit = (props) => {
   )
 };
 
-// function Example() {
-//   const [show, setShow] = useState(false);
+function AddHabitModal() {
+  const [show, setShow] = React.useState(false);
 
-//   const handleClose = () => setShow(false);
-//   const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-//   return (
-//     <>
-//       <Button variant="primary" onClick={handleShow}>
-//         Launch static backdrop modal
-//       </Button>
+  return (
+    <div>
+      <ReactBootstrap.Button variant="primary" onClick={handleShow}>
+        Launch static backdrop modal
+      </ReactBootstrap.Button>
 
-//       <Modal
-//         show={show}
-//         onHide={handleClose}
-//         backdrop="static"
-//         keyboard={false}
-//       >
-//         <Modal.Header closeButton>
-//           <Modal.Title>Modal title</Modal.Title>
-//         </Modal.Header>
-//         <Modal.Body>
-//           I will not close if you click outside me. Don't even try to press
-//           escape key.
-//         </Modal.Body>
-//         <Modal.Footer>
-//           <Button variant="secondary" onClick={handleClose}>
-//             Close
-//           </Button>
-//           <Button variant="primary">Understood</Button>
-//         </Modal.Footer>
-//       </Modal>
-//     </>
-//   );
-// }
+      <ReactBootstrap.Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <ReactBootstrap.Modal.Header closeButton>
+          <ReactBootstrap.Modal.Title>Add Habit</ReactBootstrap.Modal.Title>
+        </ReactBootstrap.Modal.Header>
+        <ReactBootstrap.Modal.Body>
+        <ReactBootstrap.Form>
+            <ReactBootstrap.Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <ReactBootstrap.Form.Label>Email address</ReactBootstrap.Form.Label>
+              <ReactBootstrap.Form.Control
+                type="email"
+                placeholder="name@example.com"
+                autoFocus
+              />
+            </ReactBootstrap.Form.Group>
+            <ReactBootstrap.Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
+              <ReactBootstrap.Form.Label>Example textarea</ReactBootstrap.Form.Label>
+              <ReactBootstrap.Form.Control as="textarea" rows={3} />
+            </ReactBootstrap.Form.Group>
+          </ReactBootstrap.Form>
+        </ReactBootstrap.Modal.Body>
+        <ReactBootstrap.Modal.Footer>
+          <ReactBootstrap.Button variant="secondary" onClick={handleClose}>
+            Close
+          </ReactBootstrap.Button>
+          <ReactBootstrap.Button variant="primary">Understood</ReactBootstrap.Button>
+        </ReactBootstrap.Modal.Footer>
+      </ReactBootstrap.Modal>
+    </div>
+  );
+}
 
 function HabitItem(props) {
   function deleteHabit() {
@@ -149,7 +162,6 @@ function HabitItem(props) {
           height="20"
         />
       </a>
-      <hr />
     </div>
   );
 }
@@ -193,8 +205,8 @@ const HabitsContainer = (props) => {
 
   return (
     <div className="habitsContainer">
-      <AddHabit addHabit={addHabit}/>
-
+      <AddHabitModal />
+      <AddHabit addHabit={addHabit}/> 
       <div className="displayHabits">
         <div>
           <h1>Current Habits</h1>
