@@ -238,7 +238,6 @@ def create_habits():
 
     db.session.add(habit)
     db.session.commit()
-    # flash("Habit created successfully!")
 
     return jsonify({"id": habit.id})
 

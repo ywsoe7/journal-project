@@ -1,4 +1,4 @@
- const AddHabit = (props) => {
+const AddHabit = (props) => {
   // const [completedDays, setCompletedDays] = React.useState([]);
   const [habit, setHabit] = React.useState('');
   const [frequency, setFrequency] = React.useState('');
@@ -33,8 +33,9 @@
           onChange={(event) => setHabit(event.target.value)}
           id="habitInput"
           placeholder="Enter a new habit"
-        />
+        /> 
         <input
+          type="number"
           value={frequency}
           onChange={(event) => setFrequency(event.target.value)}
           placeholder="# of times per week"
@@ -48,8 +49,41 @@
 function HabitItem(props) {
   return (
     <div className="card">
-      <p> Name: {props.habit} </p>
-      <p> Frequency: {props.frequency} </p>
+      <h2> {props.habit} </h2>
+        <p style={{ marginLeft: '270px' }}> {props.frequency} days / week</p>
+      <label htmlFor="check" className="checkboxes"> 
+        <div>
+          <div>Mon</div> 
+          <input type="checkbox" id="monday" name="monday" value="Monday" /> 
+        </div>
+        <div>
+          <div>Tue</div> 
+          <input type="checkbox" id="tuesday" name="tuesday" value="Tuesday" /> 
+        </div>
+        <div>
+          <div>Wed</div> 
+          <input type="checkbox" id="wednesday" name="wednesday" value="Wednesday" /> 
+        </div>
+        <div>
+          <div>Thu</div> 
+          <input type="checkbox" id="thursday" name="thursday" value="Thursday" /> 
+        </div>
+        <div>
+          <div>Fri</div> 
+          <input type="checkbox" id="friday" name="friday" value="Friday" /> 
+        </div>
+        <div>
+          <div>Sat</div> 
+          <input type="checkbox" id="saturday" name="saturday" value="Saturday" /> 
+        </div>
+        <div>
+          <div>Sun</div> 
+          <input type="checkbox" id="sunday" name="sunday" value="Sunday" /> 
+        </div>
+      </label>
+      <p> Progress: /{props.frequency}</p>
+      <img className="edit-habit-btn" alt="edit-goal-btn" src="/static/img/edit.png" width="20" height="20"></img>
+      <img className="delete-habit-btn" alt="delete-goal-btn" src="/static/img/delete.png" width="20" height="20"></img>
       <hr />
     </div>
   );
