@@ -1,7 +1,11 @@
 const AddHabit = (props) => {
-  // const [completedDays, setCompletedDays] = React.useState([]);
   const [habit, setHabit] = React.useState('');
   const [frequency, setFrequency] = React.useState('');
+
+  const [show, setShow] = React.useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   function addNewHabit() {
     fetch('/habits', {
@@ -20,42 +24,11 @@ const AddHabit = (props) => {
     });
   }
 
-  return(
-    <div className="addHabit">
-      <a href="/profile">Profile</a>
-      <h1>My Habits</h1>
-      <h2>Add Habits</h2>
-      <label htmlFor="habitInput">
-        New Habit 
-        <br />
-        <input 
-          value={habit}
-          onChange={(event) => setHabit(event.target.value)}
-          id="habitInput"
-          placeholder="Enter a new habit"
-        /> 
-        <input
-          type="number"
-          value={frequency}
-          onChange={(event) => setFrequency(event.target.value)}
-          placeholder="# of times per week"
-        />
-      </label>
-      <button type="button" onClick={addNewHabit}>Add</button>
-    </div>
-  )
-};
-
-function AddHabitModal() {
-  const [show, setShow] = React.useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
   return (
     <div>
       <ReactBootstrap.Button variant="primary" onClick={handleShow}>
-        Launch static backdrop modal
+      <img alt="add-habit-btn" src="/static/img/add.png" width="13" height="13"></img> 
+      Add New Habit
       </ReactBootstrap.Button>
 
       <ReactBootstrap.Modal
@@ -65,15 +38,18 @@ function AddHabitModal() {
         keyboard={false}
       >
         <ReactBootstrap.Modal.Header closeButton>
-          <ReactBootstrap.Modal.Title>Add Habit</ReactBootstrap.Modal.Title>
+          <ReactBootstrap.Modal.Title>New Habit</ReactBootstrap.Modal.Title>
         </ReactBootstrap.Modal.Header>
         <ReactBootstrap.Modal.Body>
         <ReactBootstrap.Form>
             <ReactBootstrap.Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <ReactBootstrap.Form.Label>Email address</ReactBootstrap.Form.Label>
+              <ReactBootstrap.Form.Label>Habit Name</ReactBootstrap.Form.Label>
               <ReactBootstrap.Form.Control
-                type="email"
-                placeholder="name@example.com"
+                value={habit}
+                onChange={(event) => setHabit(event.target.value)}
+                id="habitInput"
+                type="text"
+                placeholder="Enter a new habit"
                 autoFocus
               />
             </ReactBootstrap.Form.Group>
@@ -81,8 +57,14 @@ function AddHabitModal() {
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
-              <ReactBootstrap.Form.Label>Example textarea</ReactBootstrap.Form.Label>
-              <ReactBootstrap.Form.Control as="textarea" rows={3} />
+              <ReactBootstrap.Form.Label>Frequency</ReactBootstrap.Form.Label>
+              <ReactBootstrap.Form.Control
+                value={frequency}
+                onChange={(event) => setFrequency(event.target.value)}
+                type="number"
+                placeholder="# of times per week"
+                autoFocus
+              />
             </ReactBootstrap.Form.Group>
           </ReactBootstrap.Form>
         </ReactBootstrap.Modal.Body>
@@ -90,7 +72,11 @@ function AddHabitModal() {
           <ReactBootstrap.Button variant="secondary" onClick={handleClose}>
             Close
           </ReactBootstrap.Button>
-          <ReactBootstrap.Button variant="primary">Understood</ReactBootstrap.Button>
+          <ReactBootstrap.Button variant="primary" onClick={() => {
+            addNewHabit();
+            handleClose();}}>
+            Add
+          </ReactBootstrap.Button>
         </ReactBootstrap.Modal.Footer>
       </ReactBootstrap.Modal>
     </div>
@@ -170,15 +156,12 @@ const HabitsContainer = (props) => {
   const [habits, setHabits] = React.useState([]);
 
   function deleteHabit(index) {
-    const currentHabits = [...habits];
-    currentHabits.splice(index, 1);
-
-    setHabits(currentHabits);
+    habits.splice(index, 1);
+    setHabits([...habits]);
   }
 
   function addHabit(id, habit, frequency) {
     const newHabit = { id, habit, frequency };
-
     setHabits([...habits, newHabit]);
   }
 
@@ -205,15 +188,11 @@ const HabitsContainer = (props) => {
 
   return (
     <div className="habitsContainer">
-      <AddHabitModal />
-      <AddHabit addHabit={addHabit}/> 
       <div className="displayHabits">
         <div>
           <h1>Current Habits</h1>
-          <div> 
-            <img alt="add-habit-btn" src="/static/img/add.png" width="13" height="13"></img>
-            Add Habit
-          </div>
+          <AddHabit addHabit={addHabit}/>
+
         </div>
         <ul className="grid">{currentHabits}</ul>
       </div>

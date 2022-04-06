@@ -1,26 +1,28 @@
-.habitsContainer{
+.habitsContainer {
   display: grid;
   min-height: 100vh;
-  grid-template-areas: "nav" "main";
+  /* grid-template-areas: "nav" "main";
   grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr;
+  grid-template-rows: 1fr; */
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.displayHabits{
+.displayHabits {
   grid-area: "nav";
   padding-top: 10px;
   padding-left: 100px;
   background-color: lightcyan;
 }
 
-.addHabit{
+/* 
+.addHabit {
   grid-area: "main";
   padding-top: 10px;
   padding-right: 100px;  
   background-color: lightgoldenrodyellow;
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+ */
 
 .checkboxes {
   display: flex;
@@ -28,53 +30,53 @@
   margin-bottom: 35px;
 }
 
-.checkboxes input{
+.checkboxes input {
   margin: 0 20px 0;
   display: block;
 }
 
-.edit-habit-btn{
+.edit-habit-btn {
   margin: 0 10px 0;
   margin-left: 300px;
 }
 
-.delete-habit-btn{
+.delete-habit-btn {
   margin: 0 10px 0;
   margin-left: 300px;
 }
 
-/* .title{
+/* .title {
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 30px;
   margin-bottom: 100px;
 }
 
-.header-container{
+.header-container {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-.header-item{
+.header-item {
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   padding-right: 50px;
   font-size: 22px;
 }
 
-.goals{
+.goals {
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   display: flex;
   flex-direction: column;
   margin-right: 45px;
 }
 
-.add-goal-btn img{
+.add-goal-btn img {
   text-transform: uppercase;
   display: flex;
   align-items: center;
 }
 
-.goal{
+.goal {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -82,17 +84,17 @@
   margin-bottom: 35px;
 }
 
-.goal-name{
+.goal-name {
   text-transform: uppercase;
 }
 
-.goal-action{
+.goal-action {
   display: flex;
   align-items: center;
   margin-right: 0;
 }
 
-.goal-action img {
+.goal-action img  {
   margin-right: 10px;
 } */
 
