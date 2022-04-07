@@ -122,7 +122,11 @@ def completed_habit(date, habit_id):
 def get_completed_habits(habit_id):
     
     return CompletedHabit.query.filter(
-        CompletedHabit.habit_id == habit_id).first()
+        CompletedHabit.habit_id == habit_id).all()
+
+
+def get_completed_habit(compl_habit_id):
+    return CompletedHabit.query.get(compl_habit_id)
 
 
 if __name__ == "__main__":

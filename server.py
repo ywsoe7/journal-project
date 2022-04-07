@@ -23,32 +23,6 @@ prompts = [
     "Prompt: What are you grateful for?"
 ]
 
-HABIT_DATA = [
-    {
-        "text": "drink water",
-        "frequency": "5",
-        "sort_habit": "1",
-        "habitId": 1,
-    },
-    {
-        "text": "gym",
-        "frequency": "4",
-        "sort_habit": "1",
-        "habitId": 2,
-    },
-    {
-        "text": "study",
-        "frequency": "2",
-        "sort_habit": "3",
-        "habitId": 3,
-    },
-    {
-        "text": "run everyday",
-        "frequency": "7",
-        "sort_habit": "4",
-        "habitId": 4,
-    }
-]
 
 @app.route("/")
 def homepage():
@@ -260,6 +234,21 @@ def delete_habit(habit_id):
     db.session.commit()
 
     return jsonify({"id": habit.id})
+
+
+@app.route("/habits", methods=["POST"])
+def get_completed_habit():
+
+    habit_id = session["user_id"]
+    date = request.get_json().get("date")
+    
+
+    compl_habit = crud.get_completed_habits(habit_id, date)
+
+    db.session.add(compl_habit)
+    db.session.commit()
+
+    return jsonify({"id": compl_habit.id})
 
 
 if __name__ == "__main__":

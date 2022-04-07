@@ -22,7 +22,7 @@ function Modal(props) {
         keyboard={false}
       >
         <ReactBootstrap.Modal.Header closeButton>
-          <ReactBootstrap.Modal.Title>{props.confirmText} Habit</ReactBootstrap.Modal.Title>
+          <ReactBootstrap.Modal.Title>{props.confirmText}</ReactBootstrap.Modal.Title>
         </ReactBootstrap.Modal.Header>
         <ReactBootstrap.Modal.Body>
         <ReactBootstrap.Form>
@@ -60,7 +60,7 @@ function Modal(props) {
             props.confirm();
             handleClose();
           }}>
-            {props.confirmText}
+            {props.confirmButton}
           </ReactBootstrap.Button>
         </ReactBootstrap.Modal.Footer>
       </ReactBootstrap.Modal>
@@ -96,6 +96,7 @@ function HabitItem(props) {
     });
   }
 
+  const shouldDisable = props.completedHabits 
 
   return (
     <div className="card">
@@ -104,44 +105,56 @@ function HabitItem(props) {
       <label htmlFor="check" className="checkboxes"> 
         <div>
           <div>Mon</div> 
-          <input type="checkbox" id="monday" name="monday" value="Monday" /> 
+          <input type="checkbox" id="monday" disabled={shouldDisable} name="monday" value="Monday" /> 
         </div>
         <div>
           <div>Tue</div> 
-          <input type="checkbox" id="tuesday" name="tuesday" value="Tuesday" /> 
+          <input type="checkbox" id="tuesday" disabled={shouldDisable} name="tuesday" value="Tuesday" /> 
         </div>
         <div>
           <div>Wed</div> 
-          <input type="checkbox" id="wednesday" name="wednesday" value="Wednesday" /> 
+          <input type="checkbox" id="wednesday" disabled={shouldDisable} name="wednesday" value="Wednesday" /> 
         </div>
         <div>
           <div>Thu</div> 
-          <input type="checkbox" id="thursday" name="thursday" value="Thursday" /> 
+          <input type="checkbox" id="thursday" disabled={shouldDisable} name="thursday" value="Thursday" /> 
         </div>
         <div>
           <div>Fri</div> 
-          <input type="checkbox" id="friday" name="friday" value="Friday" /> 
+          <input type="checkbox" id="friday" disabled={shouldDisable} name="friday" value="Friday" /> 
         </div>
         <div>
           <div>Sat</div> 
-          <input type="checkbox" id="saturday" name="saturday" value="Saturday" /> 
+          <input type="checkbox" id="saturday" disabled={shouldDisable} name="saturday" value="Saturday" /> 
         </div>
         <div>
           <div>Sun</div> 
-          <input type="checkbox" id="sunday" name="sunday" value="Sunday" /> 
+          <input type="checkbox" id="sunday" disabled={shouldDisable} name="sunday" value="Sunday" /> 
         </div>
       </label>
-      <p> Progress: /{frequency}</p>
+      <p> Progress: / {frequency}</p>
 
       <Modal 
         setHabit={setHabit}
         setFrequency={setFrequency}
         confirm={confirmUpdateHabit}
-        confirmText="Update"
+        confirmText="Let's Update Your Habit!"
+        confirmButton="Update"
         habit={habit}
         frequency={frequency}
-        src="/static/img/edit.png"/>
-      <a href= "#" onClick={deleteHabit}>
+        src="/static/img/edit.png"
+      />
+      <Modal 
+        setHabit={setHabit}
+        setFrequency={setFrequency}
+        confirm={deleteHabit}
+        confirmText="Delete This Habit?"
+        confirmButton="Delete"
+        habit={habit}
+        frequency={frequency}
+        src="/static/img/delete.png"
+      />
+      {/* <a href= "#" onClick={deleteHabit}>
         <img
           className="delete-habit-btn"
           alt="delete-goal-btn"
@@ -149,7 +162,7 @@ function HabitItem(props) {
           width="20"
           height="20"
         />
-      </a>
+      </a> */}
     </div>
   );
 }
@@ -190,8 +203,8 @@ const HabitsContainer = (props) => {
       body: JSON.stringify({ habit, frequency })
     }).then((response) => {
       response.json().then(response => {
-        setHabit('');
-        setFrequency('');
+        // setHabit('');
+        // setFrequency('');
         addHabit(response.id, habit, frequency);
       });
     });
@@ -228,7 +241,8 @@ const HabitsContainer = (props) => {
             setHabit={setHabit}
             setFrequency={setFrequency}
             confirm={confirmAddUpdate}
-            confirmText="Add"
+            confirmText="Add A New Habit"
+            confirmButton="Add"
             habit={habit}
             frequency={frequency}
             src="/static/img/add.png"
