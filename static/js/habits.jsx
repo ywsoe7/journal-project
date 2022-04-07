@@ -13,10 +13,14 @@ function Modal(props) {
 
   return (
     <div>
-      <ReactBootstrap.Button variant="primary" onClick={handleShow}>
-        <img alt="add-habit-btn" src="/static/img/add.png" width="13" height="13"></img> 
-        Add New Habit
-      </ReactBootstrap.Button>
+      <a href= "#" onClick={handleShow}>
+        <img
+          className="habit-btn"
+          src={props.src}
+          width="15"
+          height="15"
+        />
+      </a>
 
       <ReactBootstrap.Modal
         show={show}
@@ -72,6 +76,10 @@ function Modal(props) {
 }
 
 function HabitItem(props) {
+  const [habits, setHabits] = React.useState([]);
+  const [habit, setHabit] = React.useState('');
+  const [frequency, setFrequency] = React.useState('');
+
   function deleteHabit() {
     fetch(`/habits/${props.id}`, {
       method: 'DELETE'
@@ -79,6 +87,23 @@ function HabitItem(props) {
       response.json().then(response => {
         console.log(props.index);
         props.deleteHabit(props.index);
+      });
+    });
+  }
+
+  function updateHabit() {
+    fetch(`/habits/${props.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ habit, frequency })
+    }).then((response) => {
+      response.json().then(response => {
+        console.log(response);
+        setHabit('');
+        setFrequency('');
+        addHabit(response.id, habit, frequency);
       });
     });
   }
@@ -118,15 +143,13 @@ function HabitItem(props) {
         </div>
       </label>
       <p> Progress: /{props.frequency}</p>
-      <a href="#" onClick={deleteHabit}>
-        <img
-          className="edit-habit-btn"
-          alt="edit-goal-btn"
-          src="/static/img/edit.png"
-          width="20"
-          height="20" 
-        />
-      </a>
+      <Modal 
+        setHabit={setHabit}
+        setFrequency={setFrequency}
+        confirm={updateHabit}
+        habit={habit}
+        frequency={frequency}
+        src="/static/img/edit.png"/>
       <a href= "#" onClick={deleteHabit}>
         <img
           className="delete-habit-btn"
@@ -200,13 +223,14 @@ const HabitsContainer = (props) => {
     <div className="habitsContainer">
       <div className="displayHabits">
         <div>
-          <h1>Current Habits</h1>
+          <h1>My Habits</h1>
           <Modal
             setHabit={setHabit}
             setFrequency={setFrequency}
             confirm={addNewHabit}
             habit={habit}
             frequency={frequency}
+            src="/static/img/add.png"
           />
         </div>
         <ul className="grid">{currentHabits}</ul>
