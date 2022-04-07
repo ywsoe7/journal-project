@@ -4,13 +4,6 @@ function Modal(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  function setHabit(event) {
-    console.log(props);
-    console.log(props.habit);
-    console.log(props.setHabit);
-    props.setHabit(event.target.value);
-  }
-
   return (
     <div>
       <a href= "#" onClick={handleShow}>
@@ -29,7 +22,7 @@ function Modal(props) {
         keyboard={false}
       >
         <ReactBootstrap.Modal.Header closeButton>
-          <ReactBootstrap.Modal.Title>Add Habit</ReactBootstrap.Modal.Title>
+          <ReactBootstrap.Modal.Title>{props.confirmText} Habit</ReactBootstrap.Modal.Title>
         </ReactBootstrap.Modal.Header>
         <ReactBootstrap.Modal.Body>
         <ReactBootstrap.Form>
@@ -37,7 +30,7 @@ function Modal(props) {
               <ReactBootstrap.Form.Label>Habit Name</ReactBootstrap.Form.Label>
               <ReactBootstrap.Form.Control
                 value={props.habit}
-                onChange={setHabit}
+                onChange={(event) => props.setHabit(event.target.value)}
                 id="habitInput"
                 type="text"
                 placeholder="Enter a new habit"
@@ -67,7 +60,7 @@ function Modal(props) {
             props.confirm();
             handleClose();
           }}>
-            Add
+            {props.confirmText}
           </ReactBootstrap.Button>
         </ReactBootstrap.Modal.Footer>
       </ReactBootstrap.Modal>
@@ -76,22 +69,20 @@ function Modal(props) {
 }
 
 function HabitItem(props) {
-  const [habits, setHabits] = React.useState([]);
-  const [habit, setHabit] = React.useState('');
-  const [frequency, setFrequency] = React.useState('');
+  const [habit, setHabit] = React.useState(props.habit);
+  const [frequency, setFrequency] = React.useState(props.frequency);
 
   function deleteHabit() {
     fetch(`/habits/${props.id}`, {
       method: 'DELETE'
     }).then((response) => {
       response.json().then(response => {
-        console.log(props.index);
         props.deleteHabit(props.index);
       });
     });
   }
 
-  function updateHabit() {
+  function confirmUpdateHabit() {
     fetch(`/habits/${props.id}`, {
       method: 'PUT',
       headers: {
@@ -100,13 +91,11 @@ function HabitItem(props) {
       body: JSON.stringify({ habit, frequency })
     }).then((response) => {
       response.json().then(response => {
-        console.log(response);
-        setHabit('');
-        setFrequency('');
-        addHabit(response.id, habit, frequency);
+        props.updateHabit(props.index, response.id, habit, frequency);
       });
     });
   }
+
 
   return (
     <div className="card">
@@ -142,11 +131,13 @@ function HabitItem(props) {
           <input type="checkbox" id="sunday" name="sunday" value="Sunday" /> 
         </div>
       </label>
-      <p> Progress: /{props.frequency}</p>
+      <p> Progress: /{frequency}</p>
+
       <Modal 
         setHabit={setHabit}
         setFrequency={setFrequency}
-        confirm={updateHabit}
+        confirm={confirmUpdateHabit}
+        confirmText="Update"
         habit={habit}
         frequency={frequency}
         src="/static/img/edit.png"/>
@@ -181,7 +172,16 @@ const HabitsContainer = (props) => {
     setHabits(currentHabits);
   }
 
-  function addNewHabit() {
+  function updateHabit(index, id, habit, frequency) {
+    const currentHabits = [...habits];
+
+    const updatedHabit = { id, habit, frequency };
+    currentHabits[index] = updatedHabit;
+    
+    setHabits(currentHabits);
+  }
+
+  function confirmAddUpdate() {
     fetch('/habits', {
       method: 'POST',
       headers: {
@@ -190,7 +190,6 @@ const HabitsContainer = (props) => {
       body: JSON.stringify({ habit, frequency })
     }).then((response) => {
       response.json().then(response => {
-        console.log(response);
         setHabit('');
         setFrequency('');
         addHabit(response.id, habit, frequency);
@@ -210,6 +209,7 @@ const HabitsContainer = (props) => {
     currentHabits.push(
       <HabitItem
         deleteHabit={deleteHabit}
+        updateHabit={updateHabit}
         index={index}
         id={habit.id}
         key={habit.id}
@@ -227,7 +227,8 @@ const HabitsContainer = (props) => {
           <Modal
             setHabit={setHabit}
             setFrequency={setFrequency}
-            confirm={addNewHabit}
+            confirm={confirmAddUpdate}
+            confirmText="Add"
             habit={habit}
             frequency={frequency}
             src="/static/img/add.png"

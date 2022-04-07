@@ -248,7 +248,6 @@ def update_habit(habit_id):
     habit.text = request.get_json().get("habit")
     habit.frequency = request.get_json().get("frequency")
 
-    db.session.update(habit)
     db.session.commit()
 
     return jsonify({"id": habit.id})
