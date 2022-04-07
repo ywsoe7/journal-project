@@ -1,34 +1,21 @@
-const AddHabit = (props) => {
-  const [habit, setHabit] = React.useState('');
-  const [frequency, setFrequency] = React.useState('');
-
+function Modal(props) {
   const [show, setShow] = React.useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  function addNewHabit() {
-    fetch('/habits', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ habit, frequency })
-    }).then((response) => {
-      response.json().then(response => {
-        console.log(response);
-        setHabit('');
-        setFrequency('');
-        props.addHabit(response.id, habit, frequency);
-      });
-    });
+  function setHabit(event) {
+    console.log(props);
+    console.log(props.habit);
+    console.log(props.setHabit);
+    props.setHabit(event.target.value);
   }
 
   return (
     <div>
       <ReactBootstrap.Button variant="primary" onClick={handleShow}>
-      <img alt="add-habit-btn" src="/static/img/add.png" width="13" height="13"></img> 
-      Add New Habit
+        <img alt="add-habit-btn" src="/static/img/add.png" width="13" height="13"></img> 
+        Add New Habit
       </ReactBootstrap.Button>
 
       <ReactBootstrap.Modal
@@ -38,15 +25,15 @@ const AddHabit = (props) => {
         keyboard={false}
       >
         <ReactBootstrap.Modal.Header closeButton>
-          <ReactBootstrap.Modal.Title>New Habit</ReactBootstrap.Modal.Title>
+          <ReactBootstrap.Modal.Title>Add Habit</ReactBootstrap.Modal.Title>
         </ReactBootstrap.Modal.Header>
         <ReactBootstrap.Modal.Body>
         <ReactBootstrap.Form>
             <ReactBootstrap.Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <ReactBootstrap.Form.Label>Habit Name</ReactBootstrap.Form.Label>
               <ReactBootstrap.Form.Control
-                value={habit}
-                onChange={(event) => setHabit(event.target.value)}
+                value={props.habit}
+                onChange={setHabit}
                 id="habitInput"
                 type="text"
                 placeholder="Enter a new habit"
@@ -58,9 +45,9 @@ const AddHabit = (props) => {
               controlId="exampleForm.ControlTextarea1"
             >
               <ReactBootstrap.Form.Label>Frequency</ReactBootstrap.Form.Label>
-              <ReactBootstrap.Form.Control
-                value={frequency}
-                onChange={(event) => setFrequency(event.target.value)}
+              <ReactBootstrap.Form.Control 
+                value={props.frequency}
+                onChange={(event) => props.setFrequency(event.target.value)}
                 type="number"
                 placeholder="# of times per week"
                 autoFocus
@@ -72,9 +59,10 @@ const AddHabit = (props) => {
           <ReactBootstrap.Button variant="secondary" onClick={handleClose}>
             Close
           </ReactBootstrap.Button>
-          <ReactBootstrap.Button variant="primary" onClick={() => {
-            addNewHabit();
-            handleClose();}}>
+          <ReactBootstrap.Button variant="primary"onClick={() => {
+            props.confirm();
+            handleClose();
+          }}>
             Add
           </ReactBootstrap.Button>
         </ReactBootstrap.Modal.Footer>
@@ -154,15 +142,37 @@ function HabitItem(props) {
 
 const HabitsContainer = (props) => {
   const [habits, setHabits] = React.useState([]);
-
-  function deleteHabit(index) {
-    habits.splice(index, 1);
-    setHabits([...habits]);
-  }
+  const [habit, setHabit] = React.useState('');
+  const [frequency, setFrequency] = React.useState('');
 
   function addHabit(id, habit, frequency) {
     const newHabit = { id, habit, frequency };
+
     setHabits([...habits, newHabit]);
+  }
+
+  function deleteHabit(index) {
+    const currentHabits = [...habits];
+    currentHabits.splice(index, 1);
+
+    setHabits(currentHabits);
+  }
+
+  function addNewHabit() {
+    fetch('/habits', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ habit, frequency })
+    }).then((response) => {
+      response.json().then(response => {
+        console.log(response);
+        setHabit('');
+        setFrequency('');
+        addHabit(response.id, habit, frequency);
+      });
+    });
   }
 
   React.useEffect(() => {
@@ -191,8 +201,13 @@ const HabitsContainer = (props) => {
       <div className="displayHabits">
         <div>
           <h1>Current Habits</h1>
-          <AddHabit addHabit={addHabit}/>
-
+          <Modal
+            setHabit={setHabit}
+            setFrequency={setFrequency}
+            confirm={addNewHabit}
+            habit={habit}
+            frequency={frequency}
+          />
         </div>
         <ul className="grid">{currentHabits}</ul>
       </div>
