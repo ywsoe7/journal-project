@@ -96,7 +96,22 @@ function HabitItem(props) {
     });
   }
 
-  const shouldDisable = props.completedHabits 
+  function toggleCompletion(event) {
+    const value = event.target.value;
+    const checked = event.target.checked;
+
+    fetch(`/completeHabit/${props.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ value, checked })
+    }).then((response) => {
+      response.json().then(response => {
+        console.log(response);
+      });
+    });
+  }
 
   return (
     <div className="card">
@@ -104,32 +119,32 @@ function HabitItem(props) {
         <p style={{ marginLeft: '270px' }}> {props.frequency} days / week</p>
       <label htmlFor="check" className="checkboxes"> 
         <div>
-          <div>Mon</div> 
-          <input type="checkbox" id="monday" disabled={shouldDisable} name="monday" value="Monday" /> 
+          <div>Mon</div>
+          <input type="checkbox" value="Monday" onClick={toggleCompletion} /> 
         </div>
         <div>
-          <div>Tue</div> 
-          <input type="checkbox" id="tuesday" disabled={shouldDisable} name="tuesday" value="Tuesday" /> 
+          <div>Tue</div>
+          <input type="checkbox" value="Tuesday" onClick={toggleCompletion} />
         </div>
         <div>
-          <div>Wed</div> 
-          <input type="checkbox" id="wednesday" disabled={shouldDisable} name="wednesday" value="Wednesday" /> 
+          <div>Wed</div>
+          <input type="checkbox" value="Wednesday" onClick={toggleCompletion} />
         </div>
         <div>
-          <div>Thu</div> 
-          <input type="checkbox" id="thursday" disabled={shouldDisable} name="thursday" value="Thursday" /> 
+          <div>Thu</div>
+          <input type="checkbox" value="Thursday" onClick={toggleCompletion} />
         </div>
         <div>
-          <div>Fri</div> 
-          <input type="checkbox" id="friday" disabled={shouldDisable} name="friday" value="Friday" /> 
+          <div>Fri</div>
+          <input type="checkbox" value="Friday" onClick={toggleCompletion} />
         </div>
         <div>
-          <div>Sat</div> 
-          <input type="checkbox" id="saturday" disabled={shouldDisable} name="saturday" value="Saturday" /> 
+          <div>Sat</div>
+          <input type="checkbox" value="Saturday" onClick={toggleCompletion} />
         </div>
         <div>
-          <div>Sun</div> 
-          <input type="checkbox" id="sunday" disabled={shouldDisable} name="sunday" value="Sunday" /> 
+          <div>Sun</div>
+          <input type="checkbox" value="Sunday" onClick={toggleCompletion} />
         </div>
       </label>
       <p> Progress: / {frequency}</p>
@@ -236,6 +251,9 @@ const HabitsContainer = (props) => {
     <div className="habitsContainer">
       <div className="displayHabits">
         <div>
+          <a href="/profile">Back to profile page</a>
+          <br />
+          <a href="/goals">Let's Check Out Your Goals</a>
           <h1>My Habits</h1>
           <Modal
             setHabit={setHabit}

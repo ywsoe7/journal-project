@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, flash, session, redirect, jso
 from model import connect_to_db, db
 import crud, random
 
-from datetime import datetime
+from datetime import datetime, date, timedelta
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
@@ -157,29 +157,9 @@ def get_prompts():
     return random.choice(prompts)
 
 
-# @app.route("/goals")
-# def add_goal():
-
-#     user_id = session["user_id"]
-#     sort_goal = None
-#     description = None
-
-#     goal = crud.create_goal(description, sort_goal, user_id)
-
-#     db.session.add(goal)
-#     db.session.commit()
-#     flash("Goal created successfully!")
-
-#     return render_template("habits_page.html")
-
-
-# @app.route("/goals")
-# def get_goal():
-
-#     user_id = session["user_id"]
-#     goal = crud.get_goal(user_id)
-
-#     return goal
+@app.route("/goals")
+def get_goals():
+    return render_template("goals_page.html")
 
 
 @app.route("/habits.json")
@@ -236,19 +216,49 @@ def delete_habit(habit_id):
     return jsonify({"id": habit.id})
 
 
-@app.route("/habits", methods=["POST"])
-def get_completed_habit():
+# @app.route("/habits/<year>/<month>")
+# def get_completed_habit(user_id, habit_id, year, month):
 
-    habit_id = session["user_id"]
-    date = request.get_json().get("date")
+#     user_id = session["user_id"]
+#     completed_habits = crud.create_completed_habits(habit_id, year, month)
+
+#     habit_complete_by_day = {}
+
+#     for habit in completed_habits:
+#         day = completed_habits.rating_date.strftime("%d")
+#         habit_complete_by_day[day] = completed_habits.habit_id  
+        
+#     return jsonify(habit_complete_by_day)
+
+
+@app.route("/completeHabit/<habit_id>", methods=["PUT"])
+def toggle_habit_completion(habit_id):
+    day = request.get_json().get("value")
     
+    days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    index_of_day = days_of_week.index(day)
 
-    compl_habit = crud.get_completed_habits(habit_id, date)
+    today = date.today()
+    current_index = today.weekday()
 
-    db.session.add(compl_habit)
+    difference = index_of_day - current_index
+    toggle_date = today + timedelta(days=difference)
+    
+    is_completed = request.get_json().get("checked")
+
+    completion = crud.get_completed_habit(toggle_date, habit_id)
+
+    print(completion)
+
+    if is_completed and not completion:
+        completion = crud.create_completed_habit(toggle_date, habit_id)
+        db.session.add(completion)
+    else:
+        db.session.delete(completion)
+
     db.session.commit()
 
-    return jsonify({"id": compl_habit.id})
+    return jsonify({"id": completion.id})
 
 
 if __name__ == "__main__":

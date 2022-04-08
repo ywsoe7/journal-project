@@ -109,24 +109,29 @@ def get_habit(habit_id):
     return Habit.query.get(habit_id)
 
 
-def completed_habit(date, habit_id):
-   
-    completed = Habit(
+def create_completed_habit(date, habit_id):
+
+    completed_habit = CompletedHabit(
         date=date,
         habit_id=habit_id
     )
 
-    return completed
+    return completed_habit
 
 
-def get_completed_habits(habit_id):
-    
+def get_completed_habits(habit_id, year, month): 
+
     return CompletedHabit.query.filter(
-        CompletedHabit.habit_id == habit_id).all()
+        CompletedHabit.user_id == habit_id,
+        extract('year', CompletedHabit.date) == year,
+        extract('month', CompletedHabit.date) == month).all()
 
 
-def get_completed_habit(compl_habit_id):
-    return CompletedHabit.query.get(compl_habit_id)
+def get_completed_habit(date, habit_id):
+
+    return CompletedHabit.query.filter(
+        CompletedHabit.habit_id == habit_id,
+        CompletedHabit.date == date).first()
 
 
 if __name__ == "__main__":
