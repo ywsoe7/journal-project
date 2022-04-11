@@ -110,7 +110,7 @@ class Habit(db.Model):
 class CompletedHabit(db.Model):
     """A completed habit."""
 
-    __tablename__ = "completed_habits" 
+    __tablename__ = "completed_habits"
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     date = db.Column(db.Date)

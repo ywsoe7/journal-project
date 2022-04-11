@@ -12,6 +12,8 @@ app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
 
+DAYS_OF_WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
 prompts = [
     "Prompt: Do your current friendships and relationships bring joy to you?",
     "Prompt: What was the best part about your day today?",
@@ -235,8 +237,7 @@ def delete_habit(habit_id):
 def toggle_habit_completion(habit_id):
     day = request.get_json().get("value")
     
-    days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-    index_of_day = days_of_week.index(day)
+    index_of_day = DAYS_OF_WEEK.index(day)
 
     today = date.today()
     current_index = today.weekday()
@@ -259,6 +260,29 @@ def toggle_habit_completion(habit_id):
     db.session.commit()
 
     return jsonify({"id": completion.id})
+
+
+@app.route("/completedHabits/<today_date>")
+def get_completed_habits(today_date):
+    user_id = session["user_id"]
+
+    today = date.fromisoformat(today_date)
+
+    index_of_day = today.weekday()
+
+    start_date = today - timedelta(days = index_of_day)
+    end_date = today + timedelta(days = 6 - index_of_day)
+
+    tuples = crud.get_weekly_completed_habits(user_id, start_date, end_date)
+    result = {}
+
+    for habit, completed_habit in tuples:
+        if habit.id in result:
+            result[habit.id].append(completed_habit.date.isoformat())
+        else:
+            result[habit.id] = [completed_habit.date.isoformat()]
+
+    return jsonify(result)
 
 
 if __name__ == "__main__":

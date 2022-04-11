@@ -2,7 +2,7 @@
 
 from model import db, User, Entry, MoodRating, Prompt, Goal, Habit, CompletedHabit, Countdown, connect_to_db
 from sqlalchemy import extract
-
+from model import db
 
 def create_user(fname, lname, email, password, phone):
     """Create and return a new user."""
@@ -119,19 +119,21 @@ def create_completed_habit(date, habit_id):
     return completed_habit
 
 
-def get_completed_habits(habit_id, year, month): 
-
-    return CompletedHabit.query.filter(
-        CompletedHabit.user_id == habit_id,
-        extract('year', CompletedHabit.date) == year,
-        extract('month', CompletedHabit.date) == month).all()
-
-
 def get_completed_habit(date, habit_id):
 
     return CompletedHabit.query.filter(
         CompletedHabit.habit_id == habit_id,
         CompletedHabit.date == date).first()
+
+
+def get_weekly_completed_habits(user_id, start_date, end_date):
+
+    return db.session.query(Habit, CompletedHabit).filter(
+        Habit.user_id == user_id,
+        CompletedHabit.date >= start_date,
+        CompletedHabit.date <= end_date
+        ).all()
+
 
 
 if __name__ == "__main__":

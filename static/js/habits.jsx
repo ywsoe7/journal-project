@@ -56,7 +56,7 @@ function Modal(props) {
           <ReactBootstrap.Button variant="secondary" onClick={handleClose}>
             Close
           </ReactBootstrap.Button>
-          <ReactBootstrap.Button variant="primary"onClick={() => {
+          <ReactBootstrap.Button variant="primary" onClick={() => {
             props.confirm();
             handleClose();
           }}>
@@ -71,6 +71,7 @@ function Modal(props) {
 function HabitItem(props) {
   const [habit, setHabit] = React.useState(props.habit);
   const [frequency, setFrequency] = React.useState(props.frequency);
+  const [count, setCount] = React.useState(0);
 
   function deleteHabit() {
     fetch(`/habits/${props.id}`, {
@@ -114,7 +115,7 @@ function HabitItem(props) {
   }
 
   return (
-    <div className="card">
+    <div className="habit-divs">
       <h2> {props.habit} </h2>
         <p style={{ marginLeft: '270px' }}> {props.frequency} days / week</p>
       <label htmlFor="check" className="checkboxes"> 
@@ -147,7 +148,7 @@ function HabitItem(props) {
           <input type="checkbox" value="Sunday" onClick={toggleCompletion} />
         </div>
       </label>
-      <p> Progress: / {frequency}</p>
+      <p> Progress: {props.count} / {props.frequency}</p>
 
       <Modal 
         setHabit={setHabit}
@@ -169,6 +170,7 @@ function HabitItem(props) {
         frequency={frequency}
         src="/static/img/delete.png"
       />
+      <hr />
       {/* <a href= "#" onClick={deleteHabit}>
         <img
           className="delete-habit-btn"
