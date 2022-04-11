@@ -130,10 +130,10 @@ def get_weekly_completed_habits(user_id, start_date, end_date):
 
     return db.session.query(Habit, CompletedHabit).filter(
         Habit.user_id == user_id,
+        Habit.id == CompletedHabit.habit_id,
         CompletedHabit.date >= start_date,
         CompletedHabit.date <= end_date
         ).all()
-
 
 
 if __name__ == "__main__":

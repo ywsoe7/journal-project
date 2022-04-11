@@ -218,21 +218,6 @@ def delete_habit(habit_id):
     return jsonify({"id": habit.id})
 
 
-# @app.route("/habits/<year>/<month>")
-# def get_completed_habit(user_id, habit_id, year, month):
-
-#     user_id = session["user_id"]
-#     completed_habits = crud.create_completed_habits(habit_id, year, month)
-
-#     habit_complete_by_day = {}
-
-#     for habit in completed_habits:
-#         day = completed_habits.rating_date.strftime("%d")
-#         habit_complete_by_day[day] = completed_habits.habit_id  
-        
-#     return jsonify(habit_complete_by_day)
-
-
 @app.route("/completeHabit/<habit_id>", methods=["PUT"])
 def toggle_habit_completion(habit_id):
     day = request.get_json().get("value")
@@ -248,8 +233,6 @@ def toggle_habit_completion(habit_id):
     is_completed = request.get_json().get("checked")
 
     completion = crud.get_completed_habit(toggle_date, habit_id)
-
-    print(completion)
 
     if is_completed and not completion:
         completion = crud.create_completed_habit(toggle_date, habit_id)
@@ -274,6 +257,7 @@ def get_completed_habits(today_date):
     end_date = today + timedelta(days = 6 - index_of_day)
 
     tuples = crud.get_weekly_completed_habits(user_id, start_date, end_date)
+    print(tuples)
     result = {}
 
     for habit, completed_habit in tuples:
