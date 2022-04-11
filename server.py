@@ -193,7 +193,7 @@ def habits_json():
             "id": habit.id,
             "habit": habit.text,
             "frequency": habit.frequency,
-            "completions": completions[habit.id]
+            "completions": completions.get(habit.id, [])
             })
 
     return jsonify(result)
