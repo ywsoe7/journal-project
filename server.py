@@ -268,30 +268,6 @@ def toggle_habit_completion(habit_id):
     return jsonify({"id": completion.id})
 
 
-@app.route("/completedHabits/<today_date>")
-def get_completed_habits(today_date):
-    user_id = session["user_id"]
-
-    today = date.fromisoformat(today_date)
-
-    index_of_day = today.weekday()
-
-    start_date = today - timedelta(days = index_of_day)
-    end_date = today + timedelta(days = 6 - index_of_day)
-
-    tuples = crud.get_weekly_completed_habits(user_id, start_date, end_date)
-    print(tuples)
-    result = {}
-
-    for habit, completed_habit in tuples:
-        if habit.id in result:
-            result[habit.id].append(DAYS_OF_WEEK[completed_habit.date.weekday()])
-        else:
-            result[habit.id] = [DAYS_OF_WEEK[completed_habit.date.weekday()]]
-
-    return jsonify(result)
-
-
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)

@@ -71,7 +71,8 @@ function Modal(props) {
 function HabitItem(props) {
   const [habit, setHabit] = React.useState(props.habit);
   const [frequency, setFrequency] = React.useState(props.frequency);
-  const [count, setCount] = React.useState(0);
+  const [completions, setCompletions] = React.useState(props.completions);
+  const [count, setCount] = React.useState(completions.length);
 
   function deleteHabit() {
     fetch(`/habits/${props.id}`, {
@@ -109,7 +110,16 @@ function HabitItem(props) {
       body: JSON.stringify({ value, checked })
     }).then((response) => {
       response.json().then(response => {
-        console.log(response);
+        const currentCompletions = [...completions];
+
+        if (checked) {
+          currentCompletions.push(value)
+        } else {
+          currentCompletions.splice(completions.indexOf(value), 1);
+        }
+
+        setCompletions(currentCompletions);
+        setCount(currentCompletions.length);
       });
     });
   }
@@ -121,34 +131,34 @@ function HabitItem(props) {
       <label htmlFor="check" className="checkboxes"> 
         <div>
           <div>Mon</div>
-          <input type="checkbox" value="Monday" onClick={toggleCompletion} /> 
+          <input type="checkbox" value="Monday" onClick={toggleCompletion} checked={completions.includes("Monday")} />
         </div>
         <div>
           <div>Tue</div>
-          <input type="checkbox" value="Tuesday" onClick={toggleCompletion} />
+          <input type="checkbox" value="Tuesday" onClick={toggleCompletion} checked={completions.includes("Tuesday")} />
         </div>
         <div>
           <div>Wed</div>
-          <input type="checkbox" value="Wednesday" onClick={toggleCompletion} />
+          <input type="checkbox" value="Wednesday" onClick={toggleCompletion} checked={completions.includes("Wednesday")} />
         </div>
         <div>
           <div>Thu</div>
-          <input type="checkbox" value="Thursday" onClick={toggleCompletion} />
+          <input type="checkbox" value="Thursday" onClick={toggleCompletion} checked={completions.includes("Thursday")} />
         </div>
         <div>
           <div>Fri</div>
-          <input type="checkbox" value="Friday" onClick={toggleCompletion} />
+          <input type="checkbox" value="Friday" onClick={toggleCompletion} checked={completions.includes("Friday")} />
         </div>
         <div>
           <div>Sat</div>
-          <input type="checkbox" value="Saturday" onClick={toggleCompletion} />
+          <input type="checkbox" value="Saturday" onClick={toggleCompletion} checked={completions.includes("Saturday")} />
         </div>
         <div>
           <div>Sun</div>
-          <input type="checkbox" value="Sunday" onClick={toggleCompletion} />
+          <input type="checkbox" value="Sunday" onClick={toggleCompletion} checked={completions.includes("Sunday")} />
         </div>
       </label>
-      <p> Progress: {props.count} / {props.frequency}</p>
+      <p> Progress: {count} / {props.frequency}</p>
 
       <Modal 
         setHabit={setHabit}
@@ -245,6 +255,7 @@ const HabitsContainer = (props) => {
         key={habit.id}
         habit={habit.habit}  // TODO: change habit to text
         frequency={habit.frequency}
+        completions={habit.completions}
       />
     );
   }
