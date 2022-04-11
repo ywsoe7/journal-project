@@ -200,7 +200,8 @@ const HabitsContainer = (props) => {
   const [frequency, setFrequency] = React.useState('');
 
   function addHabit(id, habit, frequency) {
-    const newHabit = { id, habit, frequency };
+    const completions = [];
+    const newHabit = { id, habit, frequency, completions };
 
     setHabits([...habits, newHabit]);
   }
