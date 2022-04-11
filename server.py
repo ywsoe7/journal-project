@@ -262,9 +262,9 @@ def get_completed_habits(today_date):
 
     for habit, completed_habit in tuples:
         if habit.id in result:
-            result[habit.id].append(completed_habit.date.isoformat())
+            result[habit.id].append(DAYS_OF_WEEK[completed_habit.date.weekday()])
         else:
-            result[habit.id] = [completed_habit.date.isoformat()]
+            result[habit.id] = [DAYS_OF_WEEK[completed_habit.date.weekday()]]
 
     return jsonify(result)
 
