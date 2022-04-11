@@ -166,12 +166,35 @@ def get_goals():
 
 @app.route("/habits.json")
 def habits_json():
-    habits = crud.get_habits(session["user_id"])
+    user_id = session["user_id"]
+
+
+    today = date.today()
+    index_of_day = today.weekday()
+
+    start_date = today - timedelta(days = index_of_day)
+    end_date = today + timedelta(days = 6 - index_of_day)
+
+    tuples = crud.get_weekly_completed_habits(user_id, start_date, end_date)
+    completions = {}
+
+    for habit, completed_habit in tuples:
+        if habit.id in completions:
+            completions[habit.id].append(DAYS_OF_WEEK[completed_habit.date.weekday()])
+        else:
+            completions[habit.id] = [DAYS_OF_WEEK[completed_habit.date.weekday()]]
 
     result = []
 
+    habits = crud.get_habits(user_id)
+
     for habit in habits:
-        result.append({"id": habit.id, "habit": habit.text, "frequency": habit.frequency})
+        result.append({
+            "id": habit.id,
+            "habit": habit.text,
+            "frequency": habit.frequency,
+            "completions": completions[habit.id]
+            })
 
     return jsonify(result)
 
