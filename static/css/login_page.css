@@ -1,0 +1,27 @@
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #d1b38f;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #f1b68b, #da6b6d, #b15377, #9c5888);
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #f7c9a8, #e5999a, #e088aa, #ca85b5);
+    }
+    
+    @media (min-width: 768px) {
+    .gradient-form {
+    height: 100vh !important;
+    }
+    }
+    @media (min-width: 769px) {
+    .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    }
+    }
+
+.container {
+    background: url("/static/img/journal.jpg") no-repeat center center;
+    background-size: cover;
+}
