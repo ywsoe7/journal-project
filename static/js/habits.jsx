@@ -254,7 +254,7 @@ const HabitsContainer = (props) => {
         index={index}
         id={habit.id}
         key={habit.id}
-        habit={habit.habit}  // TODO: change habit to text
+        habit={habit.habit} 
         frequency={habit.frequency}
         completions={habit.completions}
       />
@@ -266,8 +266,6 @@ const HabitsContainer = (props) => {
       <div className="displayHabits">
         <div>
           <a href="/profile">Back to profile page</a>
-          <br />
-          <a href="/goals">Let's Check Out Your Goals</a>
           <h1>My Habits</h1>
           <Modal
             setHabit={setHabit}

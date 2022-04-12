@@ -31,6 +31,20 @@ def homepage():
     """View homepage."""
 
     return render_template("homepage.html")
+    
+
+@app.route("/logout")
+def logout():
+    """Logout."""
+
+    return redirect("/")
+
+
+@app.route("/registration")
+def registration():
+    """View registration."""
+
+    return render_template("registration.html")
 
 
 @app.route("/users", methods=["POST"])
@@ -133,7 +147,7 @@ def save_mood_rating(mood_rating):
     db.session.add(rated)
     db.session.commit()
 
-    flash("Successfully saved your mood!")
+    flash("Successfully saved your mood!", 'saved')
 
     return render_template("/profile_page.html")
 

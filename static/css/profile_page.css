@@ -1,3 +1,15 @@
 a:hover {
     background-color: lightgoldenrodyellow;
 }
+
+.saved {
+    background-color: lightgoldenrodyellow;
+    color: black;
+    text-align: center;
+    font-size: 23px;
+}
+
+#container {
+    display: grid;
+    justify-content: center;
+}
