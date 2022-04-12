@@ -9,7 +9,22 @@ a:hover {
     font-size: 23px;
 }
 
-#container {
+body {
+    background-image: url(/static/img/journal.jpg);
+    background-size: cover;
+}
+.container {
     display: grid;
     justify-content: center;
+    background-image: url(/static/img/profile.jpg);
+    background-size: cover;
+}
+
+.navbar-custom {
+    background-color: rgb(241, 233, 243);
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+    color: black;
 }

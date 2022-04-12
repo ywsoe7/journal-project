@@ -9,37 +9,45 @@
 {% endblock %}
 
 {% block body %}
-<div id="container">
+<nav class="navbar navbar-custom">
+  <a class="navbar-brand" href="/profile">
+    <img src="/static/img/journal-icon.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+    Pillowbook
+  </a>
   <div>
-    <h1>Ready to journal..</h1>
-  </div><br>
+  <a class="nav-link" href="/habits">Record My Habits</a>
+  </div>
   <div>
-    <h2>Habits And Goals</h2>
-    <a href="/habits">Record new habits</a><br>
-    <a href="/logout">Log Out</a>
+    <a class="nav-link" href="/logout">Log Out</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div>
+    <h1>Hi {{ session["user_fname"] }}!</h1>
   </div>
   <section id="mood-imgs">
     <h2>How are you feeling today?</h2><br>
     <a href="/profile/ratings/1" style="text-decoration:none"> 
-      <img alt="angry" src="/static/img/depleted.jpg" width="70" height="90">
+      <img alt="angry" src="/static/img/depleted.png">
     </a>
     <a href="/profile/ratings/2" style="text-decoration:none">
-      <img alt="sad" src="/static/img/sad.jpg" width="70" height="90">
+      <img alt="sad" src="/static/img/sad.png">
     </a>
     <a href="/profile/ratings/3" style="text-decoration:none">
-      <img alt="happy" src="/static/img/okay.jpg" width="70" height="90">
+      <img alt="happy" src="/static/img/okay.png">
     </a>
     <a href="/profile/ratings/4" style="text-decoration:none">
-      <img alt="star" src="/static/img/happy.jpg" width="75" height="93">
+      <img alt="star" src="/static/img/happy.png">
     </a>
     <a href="/profile/ratings/5" style="text-decoration:none">
-      <img alt="love" src="/static/img/elated.jpg" width="65" height="92">
+      <img alt="love" src="/static/img/elated.png">
     </a>
   </section><br>
   <br>
   <br>
   <div>
-    <h2>Click on a date to start journaling</h2><br>
+    <h3>Pick a date and start journaling</h3><br>
     <div id="calendar" class="calendar"></div>
   </div>
 </div>

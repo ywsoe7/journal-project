@@ -87,7 +87,7 @@ def process_login():
         session["user_id"] = user.id
         session["user_fname"] = user.fname
         session["user_email"] = user.email
-        flash(f"Welcome back, {user.fname}!")
+        flash(f"Welcome back, {user.fname}!", "saved")
 
     return redirect("/profile")
 
@@ -147,7 +147,7 @@ def save_mood_rating(mood_rating):
     db.session.add(rated)
     db.session.commit()
 
-    flash("Successfully saved your mood!", 'saved')
+    flash("Successfully saved your mood for today!", 'saved')
 
     return render_template("/profile_page.html")
 

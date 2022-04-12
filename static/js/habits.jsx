@@ -181,15 +181,6 @@ function HabitItem(props) {
         src="/static/img/delete.png"
       />
       <hr />
-      {/* <a href= "#" onClick={deleteHabit}>
-        <img
-          className="delete-habit-btn"
-          alt="delete-goal-btn"
-          src="/static/img/delete.png"
-          width="20"
-          height="20"
-        />
-      </a> */}
     </div>
   );
 }
@@ -265,7 +256,6 @@ const HabitsContainer = (props) => {
     <div className="habitsContainer">
       <div className="displayHabits">
         <div>
-          <a href="/profile">Back to profile page</a>
           <h1>My Habits</h1>
           <Modal
             setHabit={setHabit}
