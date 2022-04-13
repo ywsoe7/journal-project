@@ -109,6 +109,11 @@ def get_habit(habit_id):
     return Habit.query.get(habit_id)
 
 
+def delete_completed_habits(habit_id):
+    db.session.query(CompletedHabit).filter(
+        CompletedHabit.habit_id == habit_id).delete(synchronize_session=False)
+
+
 def create_completed_habit(date, habit_id):
 
     completed_habit = CompletedHabit(
