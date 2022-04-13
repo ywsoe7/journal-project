@@ -1,10 +1,5 @@
 'use strict';
 
-function replacePrompt(results) {
-  document.querySelector('#prompt-text').innerHTML = results;
-}
-
-
 function addPrompt(evt) {
   fetch(`/journal/prompts`)
     .then(response => response.text())
@@ -12,5 +7,3 @@ function addPrompt(evt) {
   }
 
 document.querySelector('#get-prompt-button').addEventListener('click', addPrompt);
-
-

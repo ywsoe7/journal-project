@@ -14,7 +14,7 @@ app.jinja_env.undefined = StrictUndefined
 
 DAYS_OF_WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
-prompts = [
+PROMPTS = [
     "Prompt: Do your current friendships and relationships bring joy to you?",
     "Prompt: What was the best part about your day today?",
     "Prompt: What was the worst part about your day today?",
@@ -121,7 +121,7 @@ def create_entry(entry_date):
 
     db.session.commit()
 
-    flash("Saved succesfully. Way to go!")
+    flash("Entry saved succesfully. Way to go!", "saved")
 
     return redirect(f'/journal?date={entry_date}')
 
@@ -147,7 +147,7 @@ def save_mood_rating(mood_rating):
     db.session.add(rated)
     db.session.commit()
 
-    flash("Successfully saved your mood for today!", 'saved')
+    flash("Mood successfully saved for today!", 'saved')
 
     return render_template("/profile_page.html")
 
@@ -170,7 +170,7 @@ def get_ratings(year, month):
 @app.route("/journal/prompts")
 def get_prompts():
     
-    return random.choice(prompts)
+    return random.choice(PROMPTS)
 
 
 @app.route("/goals")

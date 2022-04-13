@@ -2,40 +2,58 @@
 {% block title %} Welcome to your journal! {% endblock %}
 
 {% block head %}
+<link rel="stylesheet" href="/static/css/journal_page.css"/>
 {% endblock %}
 
 {% block body %}
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-custom">
   <a class="navbar-brand" href="/profile">
     <img src="/static/img/journal-icon.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
     Pillowbook
   </a>
-  <div class="form-inline my-2 my-lg-0">
+  <div>
+  <a class="nav-link" href="/habits">Record My Habits</a>
+  </div>
+  <div>
     <a class="nav-link" href="/logout">Log Out</a>
   </div>
 </nav>
-<h1>{{ session["user_fname"] }}'s Journal</h1>
-<h3>{{ request.args.get('date') }}</h3>
 
-<h2>Would you like a prompt to help you get started?</h2>
-<p>
-  <button id="get-prompt-button" class="btn btn-primary mt-2">Prompt</button>
-</p>
-<div id="prompt-text"></div>
-<br>
+<div class="container">
+  <h1>{{ session["user_fname"] }}'s Journal</h1>
+  <div class="calendar-date">
+    <h3 style="float: right">
+      {{ request.args.get('date') }}
+      <div id="weekday"></div>
+    </h3>
+    <div style="float: right">
+      <img src="/static/img/calendar.png" height=45 />
+    </div>
+  </div>
 
-  <form action="/journal/{{ request.args.get('date') }}" method="POST">
-    <textarea rows="40" cols="120" name="journal_text" id="journal-text" placeholder="Write your journal...">
+
+  <h4>Would you like a prompt to help you get started?</h4>
+  <p>
+    <button id="get-prompt-button" class="btn btn-primary mt-2">Prompt</button>
+  </p>
+  <div id="prompt-text"></div>
+  <br>
+
+  <form action="/journal/{{ request.args.get('date') }}" method="POST"> 
+    <textarea name="journal_text" id="journal-text" 
+    placeholder="Write your entry here >">
     </textarea>
     </br>
+
     <button class="btn" type="submit">Save</button>
   </form>
-  
-  <p>Modified: <span id="datetime"></span></p>
-  <script>
-  var dt = new Date();
-  document.getElementById("datetime").innerHTML = dt.toLocaleString();
-  </script>
-  <script type="text/javascript" src="/static/js/journal.js"></script>
-  <script type="text/javascript" src="/static/js/prompts.js"></script>
+</div>
+
+<script>
+  const WEEKDAYS = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday", "Sunday"];
+  const date = new Date(window.location.href.split("=")[1])
+  document.getElementById("weekday").innerHTML = WEEKDAYS[date.getDay()];
+</script>
+<script type="text/javascript" src="/static/js/journal.js"></script>
+<script type="text/javascript" src="/static/js/prompts.js"></script>
 {% endblock %}

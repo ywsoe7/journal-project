@@ -21,7 +21,7 @@ function show_rating(evt) {
     const month = date.split(', ')[0];
     const month_num = months.indexOf(month) + 1;
     
-    const rating_by_color = ["red", "darkorange", "gold", "limegreen", "green"];
+    const rating_by_color = ["#EC8F7F", "#ECC264 ", "#F5EB7B", "#74C9F0", "#7DF494"];
 
     fetch(`/profile/ratings/${year}/${month_num}`)
       .then(response => response.json())

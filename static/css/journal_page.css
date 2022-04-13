@@ -10,9 +10,10 @@ a:hover {
 }
 
 body {
-    background-image: url("/static/img/journal.jpg");
-    background-size: 955px;
+    background-image: url("/static/img/tranquil.jpg");
+    background-size: cover;
 }
+
 .container {
     display: grid;
     justify-content: center;
@@ -30,11 +31,11 @@ body {
     color: black;
 }
 
-.calendar {
-    background-color: rgb(228, 206, 235);
+textarea {
+    background: url("http://i.stack.imgur.com/ynxjD.png") repeat-y;
+    width: 900px;
+    height: 700px;
+    line-height: 25px;
+    padding: 2px 10px;
+    border: solid 1px #ddd;
 }
-
-#mood-imgs a{
-    padding-right: 5px;
-}
-

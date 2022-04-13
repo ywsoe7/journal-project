@@ -77,10 +77,10 @@ function HabitItem(props) {
   function deleteHabit() {
     fetch(`/habits/${props.id}`, {
       method: 'DELETE'
-    }).then((response) => {
-      response.json().then(response => {
-        props.deleteHabit(props.index);
-      });
+    })
+    .then((response) => response.json())
+    .then(response => {
+      props.deleteHabit(props.index);
     });
   }
 

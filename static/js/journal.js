@@ -1,11 +1,9 @@
 'use strict';
 
 function show_entry() {
-    const params = new Proxy(new URLSearchParams(window.location.search), {
-        get: (searchParams, prop) => searchParams.get(prop),
-      });
-
-    fetch(`/journal/${params.date}`)
+  const date = window.location.href.split("=")[1]
+    
+    fetch(`/journal/${date}`)
       .then(response => response.text())
       .then(entry => document.getElementById('journal-text').value = entry);
 }
