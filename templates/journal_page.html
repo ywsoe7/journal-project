@@ -8,7 +8,7 @@
 {% block body %}
 <nav class="navbar navbar-custom">
   <a class="navbar-brand" href="/profile">
-    <img src="/static/img/journal-icon.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+    <img src="/static/img/journal-icon1.png"  height="40" class="d-inline-block align-top" alt="">
     Pillowbook
   </a>
   <div>
@@ -27,17 +27,16 @@
       <div id="weekday"></div>
     </h3>
     <div style="float: right">
-      <img src="/static/img/calendar.png" height=45 />
+      <img src="/static/img/calendar.png" height=63 />
     </div>
   </div>
 
 
   <h4>Would you like a prompt to help you get started?</h4>
-  <p>
+  <div>
     <button id="get-prompt-button" class="btn btn-primary mt-2">Prompt</button>
-  </p>
-  <div id="prompt-text"></div>
-  <br>
+  </div>
+  </br>
 
   <form action="/journal/{{ request.args.get('date') }}" method="POST"> 
     <textarea name="journal_text" id="journal-text" 

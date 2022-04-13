@@ -76,12 +76,12 @@ function HabitItem(props) {
 
   function deleteHabit() {
     fetch(`/habits/${props.id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
     })
-    .then((response) => response.json())
-    .then(response => {
-      props.deleteHabit(props.index);
-    });
+      .then((response) => response.json())
+      .then(response => {
+        props.deleteHabit(props.index);
+      });
   }
 
   function confirmUpdateHabit() {
@@ -91,11 +91,11 @@ function HabitItem(props) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ habit, frequency })
-    }).then((response) => {
-      response.json().then(response => {
+    })
+      .then((response) => response.json())
+      .then(response => {
         props.updateHabit(props.index, response.id, habit, frequency);
       });
-    });
   }
 
   function toggleCompletion(event) {
@@ -108,8 +108,9 @@ function HabitItem(props) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ value, checked })
-    }).then((response) => {
-      response.json().then(response => {
+    })
+      .then((response) => response.json())
+      .then(response => {
         const currentCompletions = [...completions];
 
         if (checked) {
@@ -121,7 +122,6 @@ function HabitItem(props) {
         setCompletions(currentCompletions);
         setCount(currentCompletions.length);
       });
-    });
   }
 
   return (
@@ -220,13 +220,11 @@ const HabitsContainer = (props) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ habit, frequency })
-    }).then((response) => {
-      response.json().then(response => {
-        // setHabit('');
-        // setFrequency('');
+    })
+      .then((response) => response.json())
+      .then(response => {
         addHabit(response.id, habit, frequency);
       });
-    });
   }
 
   React.useEffect(() => {

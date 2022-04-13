@@ -25,7 +25,11 @@ body {
     background-color: rgb(235, 225, 238);
 }
 
-.navbar-custom .navbar-brand,
+.navbar-custom .navbar-brand {
+    color: black;
+    font-size: 30px;
+}
+
 .navbar-custom .nav-link {
     color: black;
 }

@@ -26,7 +26,11 @@ body {
     background-color: rgb(235, 225, 238);
 }
 
-.navbar-custom .navbar-brand,
+.navbar-custom .navbar-brand {
+    color: black;
+    font-size: 30px;
+}
+
 .navbar-custom .nav-link {
     color: black;
 }
@@ -38,4 +42,17 @@ textarea {
     line-height: 25px;
     padding: 2px 10px;
     border: solid 1px #ddd;
+}
+
+h3 {
+    color:rgb(34, 64, 172);
+}
+
+#weekday {
+    color:rgb(114, 169, 231);
+}
+
+img {
+    padding-right: 1px;
+    padding-left: 15px;
 }
