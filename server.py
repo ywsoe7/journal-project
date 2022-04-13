@@ -248,6 +248,7 @@ def update_habit(habit_id):
 @app.route("/habits/<habit_id>", methods=["DELETE"])
 def delete_habit(habit_id):
     habit  = crud.get_habit(habit_id)
+    crud.delete_completed_habits(habit_id)
 
     db.session.delete(habit)
     db.session.commit()
