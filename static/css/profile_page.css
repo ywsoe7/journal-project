@@ -28,6 +28,7 @@ body {
 .navbar-custom .navbar-brand {
     color: black;
     font-size: 30px;
+    padding-left: 15px;
 }
 
 .navbar-custom .nav-link {
@@ -39,6 +40,6 @@ body {
 }
 
 #mood-imgs a{
-    padding-right: 5px;
+    padding-right: 7px;
 }
 

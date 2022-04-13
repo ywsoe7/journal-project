@@ -45,7 +45,7 @@ textarea {
 }
 
 h3 {
-    color:rgb(34, 64, 172);
+    color:rgb(47, 58, 99);
 }
 
 #weekday {
@@ -53,6 +53,17 @@ h3 {
 }
 
 img {
-    padding-right: 1px;
     padding-left: 15px;
+}
+
+.calendar-icon {
+    padding-right: 18px;
+}
+
+.gradient-custom-2 {
+    background: linear-gradient(to right, #dbd8bc, #caaf64, #ce9955, #e06ea3);
+}
+
+.gradient-custom-3 {
+    background: linear-gradient(to right, #cbc4df, #a9b0d3, #8385cf, #547cd1);
 }
