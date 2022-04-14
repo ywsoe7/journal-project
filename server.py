@@ -30,7 +30,7 @@ PROMPTS = [
 def homepage():
     """View homepage."""
 
-    return render_template("homepage.html")
+    return render_template("login_page.html")
     
 
 @app.route("/logout")

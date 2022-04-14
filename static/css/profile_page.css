@@ -16,7 +16,7 @@ body {
 .container {
     display: grid;
     justify-content: center;
-    background-image: url("/static/img/profile.jpg");
+    background-image: url("/static/img/paper-background.jpg");
     background-size: cover;
     height: 100vh;
 }
