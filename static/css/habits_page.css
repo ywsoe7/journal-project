@@ -1,9 +1,7 @@
 .habitsContainer {
   display: grid;
   min-height: 100vh;
-  /* grid-template-areas: "nav" "main";
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr; */
+  min-width: 105vh;
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -11,18 +9,13 @@
   grid-area: "nav";
   padding-top: 10px;
   padding-left: 100px;
-  background-color: lightcyan;
 }
 
-/* 
-.addHabit {
-  grid-area: "main";
-  padding-top: 10px;
-  padding-right: 100px;  
-  background-color: lightgoldenrodyellow;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+.habit-divs {
+  background-image: url("/static/img/tranquil.jpg");
+  background-size: cover;
+  padding-left: 250px;
 }
- */
 
 .checkboxes {
   display: flex;
@@ -45,56 +38,56 @@
   margin-left: 300px;
 }
 
-/* .title {
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 30px;
-  margin-bottom: 100px;
+.navbar-custom {
+  background-color: rgb(221, 210, 230);
 }
 
-.header-container {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+.navbar-custom .navbar-brand {
+  color: black;
+  font-size: 35px;
 }
 
-.header-item {
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  padding-right: 50px;
+.navbar-custom .navbar-brand img{
+  padding-left: 15px;
+}
+
+.navbar-custom .nav-link {
+  color: black;
+  font-size: 25px;
+}
+
+#container {
+  display: grid;
+  justify-content: center;
+  background-image: url("/static/img/sunrise.jpg");
+  background-size: cover;
+}
+
+.displayHabits h1 {
+  text-align: center;
+  color:rgb(208, 208, 245);
+  font-size: 70px;
+  font-weight: bold;
+}
+
+.habit-btn {
+  height: 25px;
+}
+
+.habit-divs h2 {
+  font-size: 40px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color:rgb(141, 33, 33);
+}
+
+.habit-divs p {
+  font-size: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-style: italic;
+}
+
+.checkboxes {
   font-size: 22px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-style: bold;
 }
-
-.goals {
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  display: flex;
-  flex-direction: column;
-  margin-right: 45px;
-}
-
-.add-goal-btn img {
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-}
-
-.goal {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 35px;
-}
-
-.goal-name {
-  text-transform: uppercase;
-}
-
-.goal-action {
-  display: flex;
-  align-items: center;
-  margin-right: 0;
-}
-
-.goal-action img  {
-  margin-right: 10px;
-} */
-

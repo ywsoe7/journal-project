@@ -25,3 +25,10 @@
     background: url("/static/img/journal.jpg") no-repeat center center;
     background-size: cover;
 }
+
+.saved {
+    background-color: lightgoldenrodyellow;
+    color: black;
+    text-align: center;
+    font-size: 23px;
+}

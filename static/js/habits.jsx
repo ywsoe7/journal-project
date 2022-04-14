@@ -10,8 +10,6 @@ function Modal(props) {
         <img
           className="habit-btn"
           src={props.src}
-          width="15"
-          height="15"
         />
       </a>
 
@@ -170,6 +168,7 @@ function HabitItem(props) {
         frequency={frequency}
         src="/static/img/edit.png"
       />
+      <br />
       <Modal 
         setHabit={setHabit}
         setFrequency={setFrequency}
@@ -263,7 +262,7 @@ const HabitsContainer = (props) => {
             confirmButton="Add"
             habit={habit}
             frequency={frequency}
-            src="/static/img/add.png"
+            src="/static/img/add.png" 
           />
         </div>
         <ul className="grid">{currentHabits}</ul>

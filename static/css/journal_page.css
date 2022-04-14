@@ -28,11 +28,12 @@ body {
 
 .navbar-custom .navbar-brand {
     color: black;
-    font-size: 30px;
+    font-size: 35px;
 }
 
 .navbar-custom .nav-link {
     color: black;
+    font-size: 25px;
 }
 
 textarea {
@@ -49,7 +50,7 @@ h3 {
 }
 
 #weekday {
-    color:rgb(114, 169, 231);
+    color:rgb(107, 156, 211);
 }
 
 img {
@@ -61,9 +62,13 @@ img {
 }
 
 .gradient-custom-2 {
-    background: linear-gradient(to right, #dbd8bc, #caaf64, #ce9955, #e06ea3);
+    background: linear-gradient(to right, #c6f1e3, #a7dfc6, #9feec1, #5acab2);
+    color: rgba(0, 0, 0, 0.801);
+    border:rgb(16, 53, 29);
 }
 
 .gradient-custom-3 {
-    background: linear-gradient(to right, #cbc4df, #a9b0d3, #8385cf, #547cd1);
+    background: linear-gradient(to right, #e0d6ec, #c8bee0, #b6b8e7, #87a7eb);
+    color: rgba(0, 0, 0, 0.801);
+    border:rgb(28, 38, 75);
 }
