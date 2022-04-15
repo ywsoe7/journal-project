@@ -15,6 +15,7 @@
   background-image: url("/static/img/tranquil.jpg");
   background-size: cover;
   padding-left: 250px;
+  padding-top: 25px;
 }
 
 .checkboxes {

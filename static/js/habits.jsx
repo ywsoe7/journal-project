@@ -253,7 +253,7 @@ const HabitsContainer = (props) => {
     <div className="habitsContainer">
       <div className="displayHabits">
         <div>
-          <h1>My Habits</h1>
+          <h1>Habits</h1>
           <Modal
             setHabit={setHabit}
             setFrequency={setFrequency}

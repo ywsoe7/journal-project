@@ -17,12 +17,12 @@ DAYS_OF_WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturda
 PROMPTS = [
     "Prompt: Do your current friendships and relationships bring joy to you?",
     "Prompt: What was the best part about your day today?",
-    "Prompt: What was the worst part about your day today?",
     "Prompt: Have trouble sleeping? What's keeping you up?",
     "Prompt: What are your plans for this weekend?",
     "Prompt: What is the last dream you remember?",
     "Prompt: What is your biggest regret?",
-    "Prompt: What are you grateful for?"
+    "Prompt: What are you grateful for?",
+    "Prompt: What was the worst part about your day today?"
 ]
 
 
@@ -171,11 +171,6 @@ def get_ratings(year, month):
 def get_prompts():
     
     return random.choice(PROMPTS)
-
-
-@app.route("/goals")
-def get_goals():
-    return render_template("goals_page.html")
 
 
 @app.route("/habits.json")
