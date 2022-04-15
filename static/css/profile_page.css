@@ -43,3 +43,7 @@ body {
 #mood-imgs a{
     padding-right: 7px;
 }
+
+.today {
+    font-weight: bold;
+}
