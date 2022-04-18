@@ -177,7 +177,6 @@ def get_prompts():
 def habits_json():
     user_id = session["user_id"]
 
-
     today = date.today()
     index_of_day = today.weekday()
 
