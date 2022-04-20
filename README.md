@@ -31,7 +31,7 @@ YS Journal (Your Simple Journal) is a web app built to make it easy for users to
 
 Here is how to run YS Journal locally on your machine.
 
-### Run the There and Back Again Flask App
+### YS Journal Flask App
 
   * Set up and activate a python virtualenv, and install all dependencies:
     * `virtualenv env`
