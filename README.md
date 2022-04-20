@@ -52,17 +52,17 @@ Here is how to run YS Journal locally on your machine.
 ### Profile Page
 Click on an emoji that reflects your mood for the day. Select any date on the calendar to begin writing an entry.
 
-![YS Journal Profile Page](//static/img/profile.png)
+![YS Journal Profile Page](/static/img/profile.png)
 
 ### Journal Page
 Start writing your entry in the textarea. Click on `Get a Prompt` button to randomly generate a prompt in the journal.
 
-![YS Journal Journal Page](//static/img/journal.png)
+![YS Journal Journal Page](/static/img/journal.png)
 
 ### Habits Page
 Add, update or delete habits. Click on the checkboxes to track daily habits. The checkboxes will refresh weekly on Monday.
 
-![YS Journal Habits Page](//static/img/habits.png)
+![YS Journal Habits Page](/static/img/habits.png)
 
 ## <a name="author"></a>Author
 Yoon Soe is a software engineer in San Francisco Bay Area.
